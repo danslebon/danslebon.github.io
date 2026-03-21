@@ -1,0 +1,3423 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSIAP 1 — Révision complète du programme officiel</title>
+<meta name="description" content="Révision complète et exhaustive du programme officiel SSIAP 1 : feu, SSI, ERP/IGH, évacuation, secours, rondes, risques spécifiques. Toutes les valeurs réglementaires et un quiz de 30 questions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   DESIGN SYSTEM — SSIAP 1 Révision
+   Tonalité : professionnel, sécurité, nuit de permanence
+   Palette : slate profond + orange pompier + blanc cassé
+   ============================================================ */
+
+:root {
+  --bg:         #0d1117;
+  --bg-2:       #161b22;
+  --bg-3:       #1c2430;
+  --bg-4:       #21262d;
+  --border:     #30363d;
+  --border-l:   #444c56;
+  --text:       #e6edf3;
+  --text-2:     #b1bac4;
+  --text-3:     #8b949e;
+  --accent:     #f0883e;       /* orange pompier */
+  --accent-2:   #ffa657;
+  --accent-d:   #c75000;
+  --blue:       #58a6ff;
+  --blue-d:     #1f6feb;
+  --green:      #3fb950;
+  --green-d:    #1a7f37;
+  --red:        #f85149;
+  --red-d:      #8b1a1a;
+  --yellow:     #e3b341;
+  --teal:       #39d0d8;
+  --purple:     #bc8cff;
+  --radius:     10px;
+  --radius-lg:  16px;
+  --shadow:     0 1px 3px rgba(0,0,0,.4), 0 4px 12px rgba(0,0,0,.3);
+  --shadow-lg:  0 8px 32px rgba(0,0,0,.5);
+  --font-head:  'Syne', sans-serif;
+  --font-body:  'DM Sans', sans-serif;
+  --font-mono:  'DM Mono', monospace;
+  --nav-w:      260px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 15px; }
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  line-height: 1.65;
+}
+::selection { background: var(--accent); color: #000; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-2); }
+::-webkit-scrollbar-thumb { background: var(--border-l); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ============================================================ PROGRESS BAR */
+#progress-bar {
+  position: fixed; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--border); z-index: 9999;
+}
+#progress-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent-d), var(--accent), var(--accent-2));
+  transition: width .15s ease;
+  box-shadow: 0 0 8px var(--accent);
+}
+
+/* ============================================================ SIDEBAR NAV */
+#sidebar {
+  position: fixed; top: 0; left: 0; bottom: 0;
+  width: var(--nav-w);
+  background: var(--bg-2);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  z-index: 200;
+  display: flex; flex-direction: column;
+  transition: transform .3s ease;
+}
+#sidebar-header {
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0;
+  background: var(--bg-2);
+  z-index: 1;
+}
+.logo-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-head);
+  font-size: 1.2rem; font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -.02em;
+}
+.logo-badge .flame { font-size: 1.1em; }
+.logo-sub { font-size: .7rem; color: var(--text-3); font-weight: 400; letter-spacing: .05em; margin-top: 2px; font-family: var(--font-body); }
+#sidebar-search {
+  margin-top: 12px;
+  display: flex; align-items: center;
+  background: var(--bg-3); border: 1px solid var(--border);
+  border-radius: 8px; padding: 6px 10px; gap: 6px;
+}
+#sidebar-search input {
+  background: none; border: none; outline: none;
+  color: var(--text); font-family: var(--font-body); font-size: .8rem;
+  width: 100%;
+}
+#sidebar-search input::placeholder { color: var(--text-3); }
+.search-icon { color: var(--text-3); font-size: .85rem; }
+
+#sidebar nav { padding: 8px 0 40px; }
+.nav-section { margin-top: 16px; }
+.nav-section-label {
+  font-size: .68rem; font-weight: 600; letter-spacing: .1em;
+  color: var(--text-3); text-transform: uppercase;
+  padding: 0 20px; margin-bottom: 4px;
+}
+.nav-link {
+  display: flex; align-items: center; gap: 9px;
+  padding: 7px 20px;
+  color: var(--text-2); text-decoration: none;
+  font-size: .8rem; font-weight: 400;
+  transition: all .15s; border-left: 2px solid transparent;
+  line-height: 1.3;
+}
+.nav-link:hover { color: var(--text); background: var(--bg-3); }
+.nav-link.active { color: var(--accent); border-left-color: var(--accent); background: rgba(240,136,62,.07); font-weight: 500; }
+.nav-icon { font-size: .9em; opacity: .8; flex-shrink: 0; width: 16px; text-align: center; }
+
+/* Mobile toggle */
+#sidebar-toggle {
+  display: none;
+  position: fixed; bottom: 20px; right: 20px;
+  width: 48px; height: 48px;
+  background: var(--accent); color: #000;
+  border: none; border-radius: 50%;
+  font-size: 1.2rem; cursor: pointer;
+  z-index: 300; box-shadow: var(--shadow-lg);
+  align-items: center; justify-content: center;
+}
+
+/* ============================================================ MAIN CONTENT */
+#main {
+  margin-left: var(--nav-w);
+  min-height: 100vh;
+}
+
+/* ============================================================ HERO */
+#hero {
+  background: linear-gradient(135deg, #0a0f16 0%, #101720 50%, #0d1a2a 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 56px 48px 48px;
+  position: relative; overflow: hidden;
+}
+#hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 70% 50%, rgba(240,136,62,.07), transparent);
+  pointer-events: none;
+}
+#hero::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+}
+.hero-eyebrow {
+  font-size: .72rem; font-weight: 600; letter-spacing: .12em;
+  color: var(--accent); text-transform: uppercase; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+.hero-eyebrow::before { content: '▶'; font-size: .55em; }
+.hero-title {
+  font-family: var(--font-head); font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 800; line-height: 1.1;
+  color: var(--text); letter-spacing: -.03em;
+  margin-bottom: 14px;
+}
+.hero-title em { color: var(--accent); font-style: normal; }
+.hero-desc {
+  color: var(--text-2); font-size: .95rem; max-width: 600px;
+  line-height: 1.6; margin-bottom: 32px;
+}
+.hero-stats {
+  display: flex; flex-wrap: wrap; gap: 12px;
+}
+.stat-pill {
+  background: var(--bg-3); border: 1px solid var(--border);
+  border-radius: 999px; padding: 7px 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.stat-pill .num { font-family: var(--font-head); font-weight: 700; color: var(--accent); font-size: 1rem; }
+.stat-pill .lbl { font-size: .75rem; color: var(--text-3); }
+
+/* ============================================================ SECTIONS & MODULES */
+.section {
+  padding: 0 48px 64px;
+}
+.section-header {
+  padding: 40px 0 24px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+  display: flex; align-items: flex-start; gap: 16px;
+}
+.section-icon {
+  width: 44px; height: 44px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.25rem; flex-shrink: 0;
+  background: var(--bg-3); border: 1px solid var(--border);
+}
+.section-meta { flex: 1; }
+.section-num {
+  font-size: .68rem; font-weight: 600; letter-spacing: .1em;
+  color: var(--text-3); text-transform: uppercase; margin-bottom: 4px;
+  font-family: var(--font-mono);
+}
+.section-title {
+  font-family: var(--font-head); font-size: 1.5rem;
+  font-weight: 700; color: var(--text);
+  letter-spacing: -.02em; line-height: 1.2;
+}
+.section-subtitle { font-size: .85rem; color: var(--text-3); margin-top: 4px; }
+.duration-badge {
+  background: var(--bg-4); border: 1px solid var(--border);
+  border-radius: 6px; padding: 4px 10px;
+  font-size: .72rem; color: var(--text-3);
+  font-family: var(--font-mono); white-space: nowrap; align-self: flex-start; margin-top: 4px;
+}
+
+/* Cards grid */
+.cards { display: grid; gap: 16px; }
+.cards-2 { grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+.cards-3 { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+
+.card {
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px 22px;
+  transition: border-color .2s;
+}
+.card:hover { border-color: var(--border-l); }
+
+.card-title {
+  font-family: var(--font-head); font-size: .92rem;
+  font-weight: 700; color: var(--text);
+  margin-bottom: 12px; display: flex;
+  align-items: center; gap: 8px; flex-wrap: wrap;
+}
+
+/* Badges */
+.badge {
+  display: inline-flex; align-items: center;
+  padding: 2px 8px; border-radius: 4px;
+  font-size: .62rem; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; font-family: var(--font-mono);
+}
+.badge-key  { background: rgba(240,136,62,.15); color: var(--accent); border: 1px solid rgba(240,136,62,.3); }
+.badge-imp  { background: rgba(248,81,73,.12); color: var(--red); border: 1px solid rgba(248,81,73,.25); }
+.badge-memo { background: rgba(88,166,255,.12); color: var(--blue); border: 1px solid rgba(88,166,255,.25); }
+.badge-exam { background: rgba(227,179,65,.12); color: var(--yellow); border: 1px solid rgba(227,179,65,.25); }
+.badge-ok   { background: rgba(63,185,80,.12); color: var(--green); border: 1px solid rgba(63,185,80,.25); }
+
+/* Lists */
+.list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+.list li {
+  padding-left: 18px; position: relative;
+  color: var(--text-2); font-size: .88rem; line-height: 1.5;
+}
+.list li::before {
+  content: '▸'; position: absolute; left: 0;
+  color: var(--accent); font-size: .7em; top: .25em;
+}
+.list li strong { color: var(--text); font-weight: 500; }
+
+/* Tables */
+.table-wrap { overflow-x: auto; }
+table {
+  width: 100%; border-collapse: collapse;
+  font-size: .82rem;
+}
+th {
+  background: var(--bg-3); color: var(--text-3);
+  font-size: .68rem; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; padding: 9px 12px;
+  text-align: left; border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono); white-space: nowrap;
+}
+td {
+  padding: 8px 12px; border-bottom: 1px solid var(--border);
+  color: var(--text-2); vertical-align: top; line-height: 1.5;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: rgba(255,255,255,.015); }
+td strong { color: var(--text); font-weight: 500; }
+td code {
+  background: var(--bg-3); border: 1px solid var(--border);
+  border-radius: 4px; padding: 1px 5px;
+  font-family: var(--font-mono); font-size: .8em; color: var(--teal);
+}
+
+/* Callouts */
+.callout {
+  border-radius: 10px; padding: 14px 16px;
+  margin-top: 12px; display: flex; gap: 12px;
+  align-items: flex-start; font-size: .85rem;
+}
+.callout-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.callout-body { flex: 1; }
+.callout-title { font-weight: 600; margin-bottom: 3px; font-size: .85rem; }
+.callout-orange { background: rgba(240,136,62,.1); border: 1px solid rgba(240,136,62,.25); color: var(--text-2); }
+.callout-orange .callout-title { color: var(--accent); }
+.callout-red    { background: rgba(248,81,73,.1); border: 1px solid rgba(248,81,73,.25); color: var(--text-2); }
+.callout-red .callout-title { color: var(--red); }
+.callout-green  { background: rgba(63,185,80,.1); border: 1px solid rgba(63,185,80,.25); color: var(--text-2); }
+.callout-green .callout-title { color: var(--green); }
+.callout-blue   { background: rgba(88,166,255,.1); border: 1px solid rgba(88,166,255,.25); color: var(--text-2); }
+.callout-blue .callout-title { color: var(--blue); }
+.callout-yellow { background: rgba(227,179,65,.1); border: 1px solid rgba(227,179,65,.25); color: var(--text-2); }
+.callout-yellow .callout-title { color: var(--yellow); }
+
+/* Accordions */
+.accordion { border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 8px; }
+.acc-trigger {
+  width: 100%; background: var(--bg-3); border: none; color: var(--text);
+  padding: 14px 18px; cursor: pointer;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--font-head); font-size: .9rem; font-weight: 600;
+  text-align: left; gap: 12px; transition: background .15s;
+}
+.acc-trigger:hover { background: var(--bg-4); }
+.acc-arrow { transition: transform .25s; font-size: .7rem; color: var(--text-3); flex-shrink: 0; }
+.accordion.open .acc-arrow { transform: rotate(90deg); }
+.acc-body { display: none; padding: 18px; background: var(--bg-2); border-top: 1px solid var(--border); }
+.accordion.open .acc-body { display: block; }
+
+/* Number steps */
+.steps { display: flex; flex-direction: column; gap: 0; }
+.step {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+}
+.step:last-child { border-bottom: none; }
+.step-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--bg-3); border: 1px solid var(--border);
+  color: var(--accent); font-family: var(--font-mono);
+  font-size: .72rem; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 1px;
+}
+.step-body { flex: 1; }
+.step-title { font-weight: 600; color: var(--text); font-size: .88rem; margin-bottom: 3px; }
+.step-desc { color: var(--text-2); font-size: .83rem; line-height: 1.5; }
+
+/* Section divider */
+.divider {
+  height: 1px; background: var(--border);
+  margin: 28px 0;
+}
+
+/* Highlight spans */
+mark { background: rgba(240,136,62,.2); color: var(--accent-2); border-radius: 3px; padding: 1px 3px; font-style: normal; }
+.hl-red { background: rgba(248,81,73,.15); color: var(--red); border-radius: 3px; padding: 1px 4px; }
+.hl-green { background: rgba(63,185,80,.15); color: var(--green); border-radius: 3px; padding: 1px 4px; }
+.hl-blue { background: rgba(88,166,255,.15); color: var(--blue); border-radius: 3px; padding: 1px 4px; }
+
+/* Value highlight pill */
+.val {
+  display: inline-block;
+  background: var(--bg-3); border: 1px solid var(--border);
+  border-radius: 5px; padding: 1px 7px;
+  font-family: var(--font-mono); font-size: .78em;
+  color: var(--teal);
+}
+
+/* Info grid (2 col KV) */
+.kv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.kv { background: var(--bg-3); border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; }
+.kv-label { font-size: .67rem; font-weight: 600; letter-spacing: .07em; color: var(--text-3); text-transform: uppercase; font-family: var(--font-mono); margin-bottom: 4px; }
+.kv-value { font-size: .88rem; color: var(--text); font-weight: 500; }
+
+/* Confusables grid */
+.confuse-grid { display: grid; gap: 10px; }
+.confuse-item { background: var(--bg-3); border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+.confuse-vs { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+.confuse-a, .confuse-b { font-family: var(--font-mono); font-size: .8rem; font-weight: 600; padding: 3px 9px; border-radius: 5px; }
+.confuse-a { background: rgba(88,166,255,.15); color: var(--blue); }
+.confuse-b { background: rgba(240,136,62,.15); color: var(--accent); }
+.confuse-sep { color: var(--text-3); font-size: .75rem; font-weight: 600; }
+.confuse-desc { font-size: .82rem; color: var(--text-2); line-height: 1.5; }
+
+/* Quiz styles */
+#quiz-section {
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+.quiz-container {
+  max-width: 700px;
+}
+.quiz-progress-bar {
+  height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 28px;
+}
+.quiz-progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--accent-d), var(--accent));
+  border-radius: 2px; transition: width .3s ease;
+}
+.quiz-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 6px; font-size: .75rem; color: var(--text-3);
+  font-family: var(--font-mono);
+}
+.q-card {
+  background: var(--bg-2); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 24px;
+}
+.q-number {
+  font-size: .68rem; font-weight: 600; letter-spacing: .1em;
+  color: var(--accent); text-transform: uppercase;
+  font-family: var(--font-mono); margin-bottom: 10px;
+}
+.q-text {
+  font-family: var(--font-head); font-size: 1.05rem; font-weight: 600;
+  color: var(--text); margin-bottom: 20px; line-height: 1.4;
+}
+.q-options { display: flex; flex-direction: column; gap: 10px; }
+.q-opt {
+  background: var(--bg-3); border: 1px solid var(--border);
+  border-radius: 8px; padding: 12px 15px;
+  cursor: pointer; color: var(--text-2);
+  font-size: .87rem; transition: all .15s;
+  display: flex; gap: 10px; align-items: flex-start;
+  text-align: left; width: 100%;
+}
+.q-opt:hover:not(:disabled) { border-color: var(--accent); color: var(--text); }
+.q-opt-letter {
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 1px solid var(--border-l); color: var(--text-3);
+  font-size: .72rem; font-family: var(--font-mono); font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.q-opt.correct { background: rgba(63,185,80,.12); border-color: var(--green); color: var(--text); }
+.q-opt.correct .q-opt-letter { background: var(--green); border-color: var(--green); color: #000; }
+.q-opt.wrong { background: rgba(248,81,73,.12); border-color: var(--red); color: var(--text); }
+.q-opt.wrong .q-opt-letter { background: var(--red); border-color: var(--red); color: #fff; }
+.q-opt:disabled { cursor: default; }
+.q-expl {
+  margin-top: 14px; padding: 12px 14px;
+  background: rgba(88,166,255,.07); border: 1px solid rgba(88,166,255,.2);
+  border-radius: 8px; font-size: .82rem; color: var(--text-2); line-height: 1.5;
+  display: none;
+}
+.q-expl.show { display: block; }
+.q-expl strong { color: var(--blue); }
+.quiz-btn {
+  margin-top: 18px; padding: 10px 24px;
+  background: var(--accent); border: none; border-radius: 8px;
+  color: #000; font-family: var(--font-head); font-weight: 700;
+  font-size: .9rem; cursor: pointer; transition: background .15s;
+  display: none;
+}
+.quiz-btn:hover { background: var(--accent-2); }
+.quiz-btn.show { display: inline-block; }
+.quiz-score {
+  text-align: center; padding: 40px 24px; display: none;
+}
+.quiz-score.show { display: block; }
+.score-circle {
+  width: 100px; height: 100px; border-radius: 50%;
+  background: conic-gradient(var(--accent) 0%, var(--bg-3) 0%);
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px; position: relative;
+}
+.score-circle-inner {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: var(--bg-2);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column;
+}
+.score-num { font-family: var(--font-head); font-size: 1.6rem; font-weight: 800; color: var(--text); }
+.score-denom { font-size: .72rem; color: var(--text-3); font-family: var(--font-mono); }
+.score-label { font-family: var(--font-head); font-size: 1.3rem; font-weight: 700; margin-bottom: 8px; }
+.score-msg { color: var(--text-2); font-size: .88rem; margin-bottom: 20px; }
+.quiz-restart {
+  padding: 10px 24px; background: var(--accent);
+  border: none; border-radius: 8px; color: #000;
+  font-family: var(--font-head); font-weight: 700; font-size: .9rem;
+  cursor: pointer; transition: background .15s;
+}
+.quiz-restart:hover { background: var(--accent-2); }
+
+/* Sticky section anchor padding */
+.anchor-target { scroll-margin-top: 20px; }
+
+/* Back to top */
+#back-top {
+  position: fixed; bottom: 20px; right: 76px;
+  width: 40px; height: 40px;
+  background: var(--bg-3); border: 1px solid var(--border);
+  border-radius: 8px; color: var(--text-3); font-size: .9rem;
+  display: none; align-items: center; justify-content: center;
+  cursor: pointer; transition: all .15s; text-decoration: none;
+  z-index: 100;
+}
+#back-top:hover { background: var(--bg-4); color: var(--accent); border-color: var(--accent); }
+#back-top.show { display: flex; }
+
+/* Footer */
+#footer {
+  border-top: 1px solid var(--border);
+  padding: 24px 48px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+  font-size: .75rem; color: var(--text-3);
+}
+.footer-ref { font-family: var(--font-mono); font-size: .7rem; }
+.footer-ref a { color: var(--blue); text-decoration: none; }
+.footer-ref a:hover { text-decoration: underline; }
+
+/* ============================================================ RESPONSIVE */
+@media (max-width: 900px) {
+  :root { --nav-w: 0px; }
+  #sidebar {
+    transform: translateX(-260px);
+    width: 260px;
+    box-shadow: var(--shadow-lg);
+  }
+  #sidebar.open { transform: translateX(0); }
+  #sidebar-toggle { display: flex; }
+  #main { margin-left: 0; }
+  .section { padding: 0 20px 48px; }
+  #hero { padding: 40px 20px 36px; }
+  #footer { padding: 20px; }
+  .kv-grid { grid-template-columns: 1fr; }
+  #back-top { right: 76px; }
+}
+@media (max-width: 600px) {
+  .hero-stats { gap: 8px; }
+  .section-header { flex-direction: column; gap: 10px; }
+  .cards-2, .cards-3 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div id="progress-bar"><div id="progress-fill"></div></div>
+
+<!-- Sidebar navigation -->
+<aside id="sidebar">
+  <div id="sidebar-header">
+    <div class="logo-badge"><span class="flame">🔥</span> SSIAP <span style="color:var(--text-3)">1</span></div>
+    <div class="logo-sub">PROGRAMME OFFICIEL COMPLET</div>
+    <div id="sidebar-search">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" placeholder="Rechercher..." autocomplete="off">
+    </div>
+  </div>
+  <nav id="sidebar-nav">
+    <div class="nav-section">
+      <div class="nav-section-label">Introduction</div>
+      <a href="#cadre" class="nav-link"><span class="nav-icon">📋</span>Cadre réglementaire</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Partie 1 — Feu (6h)</div>
+      <a href="#feu" class="nav-link"><span class="nav-icon">🔥</span>Feu et combustion</a>
+      <a href="#comportement" class="nav-link"><span class="nav-icon">🧱</span>Comportement au feu</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Partie 2 — Sécurité (17h)</div>
+      <a href="#erp-igh" class="nav-link"><span class="nav-icon">🏢</span>ERP & IGH</a>
+      <a href="#fondamentaux" class="nav-link"><span class="nav-icon">📐</span>Principes généraux</a>
+      <a href="#desserte" class="nav-link"><span class="nav-icon">🚒</span>Desserte & accès</a>
+      <a href="#cloisonnement" class="nav-link"><span class="nav-icon">🚪</span>Cloisonnement</a>
+      <a href="#evacuation" class="nav-link"><span class="nav-icon">🚶</span>Évacuation</a>
+      <a href="#desenfumage" class="nav-link"><span class="nav-icon">💨</span>Désenfumage</a>
+      <a href="#eclairage" class="nav-link"><span class="nav-icon">💡</span>Éclairage sécurité</a>
+      <a href="#moyens-secours" class="nav-link"><span class="nav-icon">🧯</span>Moyens de secours</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Partie 3 — Installations (9h)</div>
+      <a href="#electrique" class="nav-link"><span class="nav-icon">⚡</span>Installations électriques</a>
+      <a href="#ascenseurs" class="nav-link"><span class="nav-icon">🔼</span>Ascenseurs & nacelles</a>
+      <a href="#extinction-auto" class="nav-link"><span class="nav-icon">💧</span>Extinction automatique</a>
+      <a href="#colonnes" class="nav-link"><span class="nav-icon">🛢️</span>Colonnes sèches/humides</a>
+      <a href="#ssi" class="nav-link"><span class="nav-icon">🔔</span>SSI — Détection & alarme</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Partie 4 — Missions (18h)</div>
+      <a href="#service" class="nav-link"><span class="nav-icon">👮</span>Service de sécurité</a>
+      <a href="#consignes" class="nav-link"><span class="nav-icon">📝</span>Consignes & main courante</a>
+      <a href="#pc-securite" class="nav-link"><span class="nav-icon">🖥️</span>Poste de sécurité</a>
+      <a href="#rondes" class="nav-link"><span class="nav-icon">👁️</span>Rondes & surveillance</a>
+      <a href="#extinction-manuel" class="nav-link"><span class="nav-icon">🧯</span>Extinction manuelle</a>
+      <a href="#secours-publics" class="nav-link"><span class="nav-icon">🚑</span>Alerte & secours publics</a>
+      <a href="#sensibilisation" class="nav-link"><span class="nav-icon">📢</span>Sensibilisation</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Partie 5 — Pratique (17h)</div>
+      <a href="#visites" class="nav-link"><span class="nav-icon">🏗️</span>Visites applicatives</a>
+      <a href="#mises-en-situation" class="nav-link"><span class="nav-icon">🎭</span>Mises en situation</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Secours à personnes</div>
+      <a href="#premiers-secours" class="nav-link"><span class="nav-icon">🩺</span>Premiers secours</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Risques spécifiques</div>
+      <a href="#risques" class="nav-link"><span class="nav-icon">⚠️</span>ATEX, gaz, électricité</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Révision finale</div>
+      <a href="#valeurs" class="nav-link"><span class="nav-icon">📏</span>Valeurs réglementaires</a>
+      <a href="#confusions" class="nav-link"><span class="nav-icon">🔀</span>Confusions fréquentes</a>
+      <a href="#quiz" class="nav-link"><span class="nav-icon">🎯</span>Quiz 30 questions</a>
+    </div>
+  </nav>
+</aside>
+
+<!-- Mobile toggle -->
+<button id="sidebar-toggle" onclick="toggleSidebar()" aria-label="Menu">☰</button>
+
+<!-- Back to top -->
+<a id="back-top" href="#" title="Retour en haut">↑</a>
+
+<!-- ======================================================== MAIN -->
+<main id="main">
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-eyebrow">Révision officielle · Arrêté du 2 mai 2005 modifié</div>
+  <h1 class="hero-title">SSIAP <em>1</em> — Programme complet</h1>
+  <p class="hero-desc">Tout le contenu du programme officiel pour réviser sans rien oublier : théorie du feu, SSI, ERP/IGH, évacuation, secours à personnes, rondes, risques spécifiques, valeurs réglementaires et quiz de 30 questions.</p>
+  <div class="hero-stats">
+    <div class="stat-pill"><span class="num">5</span><span class="lbl">Parties officielles</span></div>
+    <div class="stat-pill"><span class="num">67h</span><span class="lbl">Volume minimal formation</span></div>
+    <div class="stat-pill"><span class="num">MAC</span><span class="lbl">Recyclage tous les 3 ans</span></div>
+    <div class="stat-pill"><span class="num">30 QCM</span><span class="lbl">Quiz intégré</span></div>
+    <div class="stat-pill"><span class="num">12/20</span><span class="lbl">Note minimale écrit</span></div>
+  </div>
+</section>
+
+<!-- ================================================================ SECTION 0 : CADRE RÉGLEMENTAIRE -->
+<section class="section anchor-target" id="cadre">
+  <div class="section-header">
+    <div class="section-icon">📋</div>
+    <div class="section-meta">
+      <div class="section-num">Intro</div>
+      <h2 class="section-title">Cadre réglementaire & rôle de l'agent SSIAP 1</h2>
+      <div class="section-subtitle">Textes fondamentaux · Missions · Responsabilités · Hiérarchie</div>
+    </div>
+  </div>
+
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Textes fondamentaux <span class="badge badge-key">Clé</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Texte</th><th>Objet</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Arrêté du 2 mai 2005</strong> (modif. 2008, 2019, 2024)</td><td>Missions, emploi et qualification du personnel SSIAP en ERP/IGH</td></tr>
+            <tr><td>Code de la construction et de l'habitation</td><td>Sécurité incendie dans les ERP et IGH</td></tr>
+            <tr><td><strong>Arrêté du 25 juin 1980</strong> (modifié)</td><td>Règlement de sécurité ERP</td></tr>
+            <tr><td>Décret n°2011-246</td><td>Réglementation des IGH</td></tr>
+            <tr><td>Art. 223-6 Code pénal</td><td>Non-assistance à personne en danger (NAPD)</td></tr>
+            <tr><td>Art. 223-1 Code pénal</td><td>Mise en danger délibérée d'autrui</td></tr>
+            <tr><td>Art. 73 CPP</td><td>Appréhension en flagrant délit</td></tr>
+            <tr><td>Norme NF S61-931</td><td>SSI — définitions</td></tr>
+            <tr><td>Norme NF S61-970</td><td>Règles de maintenance des SSI</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Missions officielles du SSIAP 1 <span class="badge badge-key">Clé</span></div>
+      <ul class="list">
+        <li><strong>Prévention des incendies</strong> dans l'établissement</li>
+        <li><strong>Sensibilisation des employés</strong> en matière de sécurité incendie et d'assistance à personnes</li>
+        <li><strong>Entretien élémentaire</strong> des moyens concourant à la sécurité incendie</li>
+        <li><strong>Alerte et accueil des secours</strong></li>
+        <li><strong>Évacuation du public</strong></li>
+        <li><strong>Intervention précoce</strong> face aux départs de feu</li>
+        <li><strong>Assistance à personnes</strong> au sein des établissements où ils exercent</li>
+        <li><strong>Exploitation du PC sécurité</strong> et traçabilité documentaire</li>
+      </ul>
+      <div class="callout callout-yellow" style="margin-top:12px">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body"><div class="callout-title">Point d'attention examen</div>À l'examen, la formulation officielle des missions est souvent reprise presque telle quelle. À apprendre mot pour mot.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Ce que le SSIAP 1 ne peut PAS faire <span class="badge badge-imp">Important</span></div>
+      <ul class="list">
+        <li>Retenir quelqu'un contre son gré <em>(sauf flagrant délit, art. 73 CPP)</em></li>
+        <li>Fouiller les personnes sans leur consentement</li>
+        <li>Procéder à des arrestations</li>
+        <li>Décider seul d'une évacuation générale <em>(hors urgence absolue)</em></li>
+        <li>Modifier les consignes de sécurité écrites</li>
+        <li>Réarmer le SSI sans l'accord du SSIAP 2</li>
+      </ul>
+      <div class="callout callout-blue" style="margin-top:12px">
+        <span class="callout-icon">ℹ️</span>
+        <div class="callout-body"><div class="callout-title">Exception légale — Art. 73 CPP</div>En flagrant délit de crime ou délit, tout citoyen peut appréhender l'auteur et le remettre immédiatement à la police ou gendarmerie.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Responsabilités juridiques</div>
+      <ul class="list">
+        <li><strong>Responsabilité civile</strong> — Obligation de réparer un préjudice causé par faute ou négligence.</li>
+        <li><strong>NAPD (art. 223-6 CP)</strong> — <span class="hl-red">5 ans d'emprisonnement et 75 000 € d'amende</span></li>
+        <li><strong>Mise en danger délibérée (art. 223-1 CP)</strong> — <span class="hl-red">1 an et 15 000 €</span></li>
+        <li><strong>Blessures involontaires aggravées</strong> — <span class="hl-red">3 ans et 45 000 €</span></li>
+      </ul>
+      <div class="callout callout-orange" style="margin-top:12px">
+        <span class="callout-icon">📌</span>
+        <div class="callout-body"><div class="callout-title">Règles pratiques</div>Ne jamais laisser une victime seule. Ne jamais ignorer une alarme. Ne jamais bloquer une issue de secours.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Hiérarchie SSIAP <span class="badge badge-memo">Mémo</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Niveau</th><th>Titre</th><th>Formation</th><th>Rôle</th></tr></thead>
+          <tbody>
+            <tr><td><strong>SSIAP 3</strong></td><td>Chef de service</td><td><span class="val">200h</span></td><td>Responsable global sécurité incendie</td></tr>
+            <tr><td><strong>SSIAP 2</strong></td><td>Chef d'équipe</td><td><span class="val">70h</span></td><td>Encadrement opérationnel</td></tr>
+            <tr><td><strong>SSIAP 1</strong></td><td>Agent</td><td><span class="val">67h min</span></td><td>Exécution terrain, rondes, 1re intervention</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-blue" style="margin-top:12px">
+        <span class="callout-icon">ℹ️</span>
+        <div class="callout-body">Le SSIAP 1 reçoit ses ordres du SSIAP 2. En l'absence de SSIAP 2, il en réfère au chef d'établissement ou SSIAP 3.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Formations et recyclage <span class="badge badge-memo">Mémo</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Formation</th><th>Durée</th><th>Fréquence</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Initiale SSIAP 1</strong></td><td><span class="val">67h min</span></td><td>Une fois (valable 3 ans)</td></tr>
+            <tr><td><strong>MAC SSIAP 1</strong></td><td><span class="val">35h</span></td><td>Tous les 3 ans</td></tr>
+            <tr><td>SST (Sauveteur Secouriste)</td><td><span class="val">14h</span></td><td>Recyclage tous les 2 ans</td></tr>
+            <tr><td>Formation SSIAP 2</td><td><span class="val">70h</span></td><td>Après expérience SSIAP 1</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-orange" style="margin-top:10px">
+        <span class="callout-icon">📌</span>
+        <div class="callout-body"><div class="callout-title">Conditions d'accès formation SSIAP 1</div>Aptitude médicale (certificat &lt; 3 mois) + secourisme valide (SST/PSC1) + capacité à rédiger une main courante.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Documents obligatoires au poste de sécurité</div>
+      <ul class="list">
+        <li><strong>Registre de sécurité</strong> — document légal, conservé <span class="val">≥ 5 ans</span>, présenté lors des visites</li>
+        <li>Consignes de sécurité incendie générales et spéciales</li>
+        <li>Plans de l'établissement (évacuation, compartimentage, réseaux)</li>
+        <li>Carnet de rondes — tracé systématique des passages</li>
+        <li>Main courante / rapport de garde</li>
+        <li>Fiches de postes rédigées par le SSIAP 2</li>
+        <li>Coordonnées des secours (18, 15, 17, 112) et responsables</li>
+        <li>Planning des vérifications périodiques</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Tenue et équipements de l'agent</div>
+      <ul class="list">
+        <li>Tenue réglementaire identifiante avec <strong>badge visible</strong> en permanence</li>
+        <li>Moyen de communication opérationnel (radio ou téléphone)</li>
+        <li>Lampe torche (autonomie vérifiée)</li>
+        <li>Clés des accès et locaux techniques</li>
+        <li>Fiche de poste et consignes</li>
+        <li>Carnet de rondes à jour</li>
+        <li>EPI disponibles (selon établissement : gants, casque, masque anti-fumées simple)</li>
+      </ul>
+      <div class="callout callout-teal" style="margin-top:10px">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body"><div class="callout-title">Rappel professionnel</div>L'agent ne doit jamais abandonner son poste sans être relevé ou sans autorisation explicite du SSIAP 2. La continuité du service est une obligation réglementaire.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Examen SSIAP 1 <span class="badge badge-exam">Examen</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Épreuve</th><th>Format</th><th>Durée</th><th>Validation</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Écrite</strong></td><td>QCM 30 questions (réponses multiples possibles)</td><td><span class="val">30 min</span></td><td><span class="hl-green">≥ 12/20</span></td></tr>
+            <tr><td><strong>Pratique</strong></td><td>Ronde avec anomalies + sinistre + jury + main courante</td><td><span class="val">15 min</span></td><td>Apte / Inapte</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-blue" style="margin-top:10px">
+        <span class="callout-icon">ℹ️</span>
+        <div class="callout-body">En cas d'ajournement, le candidat dispose d'<strong>1 an</strong> pour valider toutes les épreuves. Passé ce délai : nouvelle formation complète.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ PARTIE 1 — FEU (Séq. 1.1 + 1.2) -->
+<section class="section anchor-target" id="feu">
+  <div class="section-header">
+    <div class="section-icon">🔥</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 1 · Séquence 1.1 — 4h</div>
+      <h2 class="section-title">Feu, combustion et propagation</h2>
+      <div class="section-subtitle">Triangle du feu · Classes · Propagation · Effets physiologiques · Phénomènes thermiques</div>
+    </div>
+    <div class="duration-badge">⏱ 4h</div>
+  </div>
+
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Le triangle du feu <span class="badge badge-key">Clé</span></div>
+      <p style="font-size:.85rem;color:var(--text-2);margin-bottom:12px">Le feu nécessite la réunion <strong style="color:var(--text)">simultanée</strong> de 3 éléments :</p>
+      <ul class="list">
+        <li><strong>Combustible</strong> — tout ce qui peut brûler (bois, papier, gaz, liquides inflammables, métaux réactifs)</li>
+        <li><strong>Comburant</strong> — oxygène de l'air (teneur minimale <span class="val">15 %</span> pour maintenir la combustion)</li>
+        <li><strong>Énergie d'activation</strong> — chaleur, étincelle, flamme, friction, réaction chimique</li>
+      </ul>
+      <div class="divider"></div>
+      <div class="card-title" style="margin-top:0">Principe d'extinction — 3 méthodes</div>
+      <ul class="list">
+        <li><strong>Refroidissement</strong> — eau (abaissement de la température sous le point d'inflammation)</li>
+        <li><strong>Étouffement</strong> — CO₂, mousse, couverture anti-feu (suppression du comburant)</li>
+        <li><strong>Élimination du combustible</strong> — couper l'alimentation en gaz, déplacer les matières</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Classes de feux <span class="badge badge-memo">Mémo</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Classe</th><th>Nature</th><th>Exemples</th><th>Agent adapté</th></tr></thead>
+          <tbody>
+            <tr><td><strong>A</strong></td><td>Solides</td><td>Bois, papier, tissu, carton</td><td>Eau, poudre ABC</td></tr>
+            <tr><td><strong>B</strong></td><td>Liquides / solides liquéfiables</td><td>Essence, alcool, peinture, huile minérale</td><td>Poudre ABC/BC, mousse, CO₂</td></tr>
+            <tr><td><strong>C</strong></td><td>Gaz inflammables</td><td>Butane, propane, gaz naturel, acétylène</td><td>Poudre BC/ABC <em>(couper le gaz d'abord !)</em></td></tr>
+            <tr><td><strong>D</strong></td><td>Métaux</td><td>Magnésium, sodium, lithium, aluminium poudre</td><td>Poudre spéciale D <strong>UNIQUEMENT</strong></td></tr>
+            <tr><td><strong>F</strong></td><td>Huiles/graisses de cuisson</td><td>Friteuses, huile végétale à très haute température</td><td>Extincteur classe F <span class="hl-red">JAMAIS d'eau</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-red" style="margin-top:10px">
+        <span class="callout-icon">🚨</span>
+        <div class="callout-body"><div class="callout-title">Danger absolu — Classe F</div>Verser de l'eau sur de l'huile enflammée provoque une explosion de vapeur pouvant être mortelle.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Les 4 phases du feu</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-title">Éclosion (feu naissant)</div>
+            <div class="step-desc">Amorce discrète, fumées légères. <span class="hl-green">Intervention extincteur très efficace.</span> Durée variable (minutes à heures).</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-title">Embrasement (feu déclaré)</div>
+            <div class="step-desc">Extension rapide, fumées denses et chaudes. Action extincteur encore possible sur feu circonscrit. RIA utilisable.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-title">Brasier (feu généralisé)</div>
+            <div class="step-desc">Flash-over possible. <span class="hl-red">Intervention sapeurs-pompiers obligatoire. Évacuation impérative.</span></div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-title">Déclin</div>
+            <div class="step-desc">Épuisement du combustible. Risque de reprise et de back-draft à l'ouverture. <span class="hl-red">Ne jamais pénétrer sans équipement.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Modes de propagation du feu</div>
+      <ul class="list">
+        <li><strong>Conduction</strong> — Transfert par contact dans les solides (tuyaux métalliques, charpentes, dalles béton). Risque de propagation à travers les parois.</li>
+        <li><strong>Convection</strong> — Déplacement des gaz chauds vers le haut. <mark>Principal vecteur de propagation dans les bâtiments. Responsable de la majorité des décès par asphyxie.</mark></li>
+        <li><strong>Rayonnement</strong> — Transfert de chaleur infrarouge à distance. Peut enflammer des matériaux combustibles à plusieurs mètres.</li>
+        <li><strong>Transport direct</strong> — Flammèches ou braises portées par le vent, projections d'étincelles. Risque de départ à distance.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Effets physiologiques du feu sur l'homme</div>
+      <ul class="list">
+        <li><strong>Chaleur</strong> — Brûlures dès 48°C, brûlures des voies respiratoires par aérosols chauds.</li>
+        <li><strong>Monoxyde de carbone (CO)</strong> — <span class="hl-red">Cause de mort n°1 en incendie.</span> Inodore, incolore. Se fixe sur l'hémoglobine 240× plus vite que l'O₂. Mortel à 1 % en quelques minutes.</li>
+        <li><strong>Acide cyanhydrique (HCN)</strong> — Combustion des matières plastiques, polyuréthane, laine. Extrêmement toxique même à faible concentration.</li>
+        <li><strong>Acroléine</strong> — Combustion du bois, irritante pour les yeux et voies respiratoires.</li>
+        <li><strong>Opacité des fumées</strong> — Désorientation, panique, perte de visibilité.</li>
+        <li><strong>Panique</strong> — Bousculades, retours en arrière, sauts, décès par traumatisme.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Flash-over & Back-draft <span class="badge badge-key">Clé</span></div>
+      <ul class="list">
+        <li><strong>Flash-over (embrasement généralisé éclair)</strong> — Élévation soudaine de température provoquant l'ignition simultanée de tous les combustibles d'un local. Se produit généralement à <span class="val">500–600°C</span> au niveau du plafond. Mortel pour toute personne présente.</li>
+        <li><strong>Back-draft (explosion de fumées)</strong> — Apport soudain d'air dans un local en feu manquant d'oxygène. Provoque une explosion ou déflagration violente.</li>
+      </ul>
+      <div class="callout callout-red" style="margin-top:12px">
+        <span class="callout-icon">🚨</span>
+        <div class="callout-body"><div class="callout-title">Signes précurseurs de back-draft</div>Porte chaude, fumée qui rentre par les fissures, fumées noires sortant et rentrant → DANGER. NE PAS OUVRIR. Alerter les pompiers immédiatement.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">LIE / LSE — Explosivité des gaz</div>
+      <ul class="list">
+        <li><strong>LIE (Limite Inférieure d'Explosivité)</strong> — Concentration minimale de gaz dans l'air en dessous de laquelle le mélange n'est pas explosif (trop pauvre).</li>
+        <li><strong>LSE (Limite Supérieure d'Explosivité)</strong> — Concentration maximale au-dessus de laquelle le mélange n'est pas explosif (trop riche).</li>
+        <li><strong>Gaz naturel (méthane)</strong> — LIE = <span class="val">5 %</span> · LSE = <span class="val">15 %</span>. Entre ces valeurs : mélange explosif. Un détecteur alerte dès 20 % de la LIE (soit 1 %).</li>
+        <li><strong>Point d'éclair</strong> — Température minimale à laquelle un liquide émet suffisamment de vapeurs pour s'enflammer au contact d'une flamme. Ex : essence = <span class="val">−40°C</span>.</li>
+        <li><strong>Température d'auto-inflammation</strong> — Température à laquelle un corps s'enflamme <em>spontanément</em>, sans source d'énergie externe. Différente du point d'éclair qui nécessite une flamme pilote.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ Séquence 1.2 — Comportement au feu -->
+<section class="section anchor-target" id="comportement">
+  <div class="section-header">
+    <div class="section-icon">🧱</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 1 · Séquence 1.2 — 2h</div>
+      <h2 class="section-title">Comportement au feu des matériaux</h2>
+      <div class="section-subtitle">Réaction au feu · Résistance au feu · Euroclasses</div>
+    </div>
+    <div class="duration-badge">⏱ 2h</div>
+  </div>
+
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Réaction au feu des matériaux (Euroclasses) <span class="badge badge-imp">Important</span></div>
+      <p style="font-size:.82rem;color:var(--text-3);margin-bottom:10px">Comportement du <strong style="color:var(--text)">matériau lui-même</strong> face aux flammes (combustibilité, production de fumées)</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Euroclasse</th><th>Comportement</th><th>Exemples</th></tr></thead>
+          <tbody>
+            <tr><td><strong>A1</strong></td><td>Non combustible sans fumées</td><td>Béton, acier, verre, brique, pierre</td></tr>
+            <tr><td><strong>A2</strong></td><td>Non combustible sous condition</td><td>Plâtre avec parement, laine minérale</td></tr>
+            <tr><td><strong>B</strong></td><td>Combustibilité très limitée</td><td>Laine de verre revêtue</td></tr>
+            <tr><td><strong>C</strong></td><td>Combustibilité limitée</td><td>Bois ignifugé, plaques de plâtre revêtues</td></tr>
+            <tr><td><strong>D</strong></td><td>Combustibilité acceptable</td><td>Bois massif, OSB, bois lamellé-collé</td></tr>
+            <tr><td><strong>E</strong></td><td>Réaction acceptable</td><td>Panneaux bois courants</td></tr>
+            <tr><td><strong>F</strong></td><td>Non classé / non testé</td><td>Produits sans déclaration</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-blue" style="margin-top:10px">
+        <span class="callout-icon">ℹ️</span>
+        <div class="callout-body"><div class="callout-title">Ancien classement français</div>M0 (incombustible) → M1 → M2 → M3 → M4 (facilement inflammable). Encore fréquent dans les documents anciens.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Résistance au feu des structures <span class="badge badge-imp">Important</span></div>
+      <p style="font-size:.82rem;color:var(--text-3);margin-bottom:10px">Capacité d'un élément de <strong style="color:var(--text)">construction</strong> à conserver ses fonctions pendant une durée définie</p>
+      <ul class="list">
+        <li><strong>R</strong> — Résistance mécanique (portance maintenue, ne s'effondre pas)</li>
+        <li><strong>E</strong> — Étanchéité aux flammes et gaz chauds</li>
+        <li><strong>I</strong> — Isolation thermique (face non exposée reste froide)</li>
+        <li><strong>M</strong> — Résistance aux chocs mécaniques (portes, cloisons)</li>
+        <li><strong>W</strong> — Rayonnement thermique limité</li>
+      </ul>
+      <div class="callout callout-orange" style="margin-top:12px">
+        <span class="callout-icon">📌</span>
+        <div class="callout-body">Exemple : <strong>REI 60</strong> = résiste 60 minutes aux critères R + E + I.<br>
+        <strong>CF 1h</strong> = Coupe-Feu 1 heure = REI 60.<br>
+        <strong>CF 2h</strong> = REI 120.<br>
+        Les murs coupe-feu séparent les compartiments de sécurité.</div>
+      </div>
+      <div class="divider"></div>
+      <div class="callout callout-red">
+        <span class="callout-icon">🔀</span>
+        <div class="callout-body"><div class="callout-title">À ne pas confondre</div><strong>Réaction au feu</strong> = comportement du matériau (Euroclasses A1–F).<br><strong>Résistance au feu</strong> = tenue de la structure dans le temps (REI 60, CF 1h).</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ PARTIE 2 — ERP & IGH -->
+<section class="section anchor-target" id="erp-igh">
+  <div class="section-header">
+    <div class="section-icon">🏢</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 2 · Séquence 2.1 — 2h30</div>
+      <h2 class="section-title">ERP & IGH — Classification réglementaire</h2>
+      <div class="section-subtitle">Définitions · Types · Catégories · Spécificités O, U, J · Commission de sécurité</div>
+    </div>
+    <div class="duration-badge">⏱ 2h30</div>
+  </div>
+
+  <div class="cards cards-2">
+    <div class="card" style="border-color:var(--accent);border-left:3px solid var(--accent)">
+      <div class="card-title">Définition ERP <span class="badge badge-key">Clé</span></div>
+      <p style="font-size:.9rem;color:var(--text-2);line-height:1.6">Tout bâtiment, local ou enceinte dans lesquels des personnes sont admises, soit librement, soit moyennant une rétribution ou une participation, quelles que soient les obligations imposées aux personnes admises. <em style="color:var(--text-3)">(Art. R123-2 Code de la construction)</em></p>
+      <div class="callout callout-blue" style="margin-top:12px">
+        <span class="callout-icon">ℹ️</span>
+        <div class="callout-body">Chaque ERP est classé selon 2 critères indépendants : son <strong>type</strong> (activité exercée) et sa <strong>catégorie</strong> (effectif du public).</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Catégories ERP (effectif) <span class="badge badge-key">Clé</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Catégorie</th><th>Effectif total</th><th>SSIAP</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1ère</strong></td><td>Au-dessus de 1 500 personnes</td><td><span class="hl-green">SSIAP 1, 2, 3</span></td></tr>
+            <tr><td><strong>2ème</strong></td><td>De 701 à 1 500 personnes</td><td><span class="hl-green">SSIAP 1 et 2</span></td></tr>
+            <tr><td><strong>3ème</strong></td><td>De 301 à 700 personnes</td><td>SSIAP 1 (selon type)</td></tr>
+            <tr><td><strong>4ème</strong></td><td>Jusqu'à 300 personnes</td><td>Selon type</td></tr>
+            <tr><td><strong>5ème</strong></td><td>Petits ERP (seuils par type)</td><td>Non</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card" style="grid-column: 1 / -1">
+      <div class="card-title">Types ERP — Tableau complet <span class="badge badge-memo">Mémo</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Type</th><th>Établissement</th><th>Spécificités sécurité incendie</th></tr></thead>
+          <tbody>
+            <tr><td><strong>J</strong></td><td>Structures accueil personnes âgées/handicapées (EHPAD, FAM, IME)</td><td>Évacuation différée, chambres CF, personnel formé</td></tr>
+            <tr><td><strong>L</strong></td><td>Salles de spectacles, conférences, cinémas</td><td>Dégagements larges, éclairage scène, rideau de fer</td></tr>
+            <tr><td><strong>M</strong></td><td>Magasins, centres commerciaux, supermarchés</td><td>Stocks combustibles, compartimentage cellules</td></tr>
+            <tr><td><strong>N</strong></td><td>Restaurants, cafés, brasseries</td><td>Risques cuisines (flammes, graisses), classe F</td></tr>
+            <tr><td><strong>O</strong></td><td>Hôtels, pensions de famille, résidences tourisme</td><td>Public dormant, évacuation nocturne, alarme chambre</td></tr>
+            <tr><td><strong>P</strong></td><td>Salles de danse, discothèques, jeux</td><td>Obscurité, public dense debout, gestion panique</td></tr>
+            <tr><td><strong>R</strong></td><td>Établissements d'enseignement, crèches</td><td>Enfants, exercices 2/an dont 1er mois</td></tr>
+            <tr><td><strong>S</strong></td><td>Bibliothèques, médiathèques</td><td>Stocks papier très combustibles</td></tr>
+            <tr><td><strong>T</strong></td><td>Salles d'expositions, foires, salons</td><td>Charges variables, câblages provisoires</td></tr>
+            <tr><td><strong>U</strong></td><td>Établissements sanitaires (hôpitaux, cliniques)</td><td>Patients non évacuables, confinement, évacuation progressive, O₂ médical</td></tr>
+            <tr><td><strong>V</strong></td><td>Lieux de culte</td><td>Matériaux anciens, effectif variable, bougies</td></tr>
+            <tr><td><strong>W</strong></td><td>Administrations, banques, bureaux avec accueil</td><td>Standard ERP bureaux</td></tr>
+            <tr><td><strong>X</strong></td><td>Établissements sportifs couverts</td><td>Chlore (piscine), glace (patinoire), gradins</td></tr>
+            <tr><td><strong>Y</strong></td><td>Musées, galeries, expositions</td><td>Œuvres irremplaçables, sprinklers délicats</td></tr>
+            <tr><td><strong>CTS</strong></td><td>Chapiteaux, tentes, structures provisoires</td><td>Règles spécifiques structures temporaires</td></tr>
+            <tr><td><strong>PA</strong></td><td>Établissements de plein air (stades, parcs)</td><td>Grandes surfaces, tribunes, structures métalliques</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Spécificités Type O — Hôtels <span class="badge badge-imp">Important</span></div>
+      <ul class="list">
+        <li>Le public dort et ne connaît pas les lieux. <strong>L'alarme doit réveiller.</strong></li>
+        <li>Procédure spéciale : agent frappe aux portes, vérifie que toutes les chambres sont vides, signale les personnes non retrouvées.</li>
+        <li>Jamais d'ascenseur pour l'évacuation.</li>
+        <li>Les chambres sont des cellules coupe-feu individuelles.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Spécificités Type U — Établissements sanitaires <span class="badge badge-imp">Important</span></div>
+      <ul class="list">
+        <li>Évacuation sectorielle progressive : on évacue le secteur sinistré vers les secteurs adjacents (confinement).</li>
+        <li>Les patients ne peuvent pas toujours être évacués vers l'extérieur.</li>
+        <li>L'agent doit connaître les zones de refuge et les procédures de mise en sécurité progressive.</li>
+        <li>Présence d'oxygène médical : risque d'activation de la combustion.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Commission de sécurité <span class="badge badge-imp">Important</span></div>
+      <ul class="list">
+        <li>Organisme administratif de contrôle de la sécurité incendie des ERP et IGH.</li>
+        <li>Composée de représentants de la préfecture, pompiers, police/gendarmerie, services techniques.</li>
+        <li>Visite d'ouverture obligatoire pour les ERP catégories 1 à 4 selon type.</li>
+        <li><strong>Visites périodiques :</strong> 1ère cat. = <span class="val">tous les 3 ans</span> · 2ème, 3ème, 4ème = <span class="val">tous les 5 ans</span></li>
+        <li>Peut formuler des prescriptions ou proposer la fermeture.</li>
+        <li>Le registre de sécurité doit être présenté lors de chaque visite.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Avant une visite de la commission <span class="badge badge-exam">Examen</span></div>
+      <ul class="list">
+        <li>Préparer le registre de sécurité, rapports de vérifications, observations antérieures.</li>
+        <li>Vérifier la disponibilité des plans, consignes, notices d'exploitation.</li>
+        <li>Contrôle visuel : issues, BAES, extincteurs, RIA, portes coupe-feu, désenfumage, signalisation.</li>
+        <li>S'assurer que les prescriptions précédentes ont été levées ou font l'objet d'un suivi documenté.</li>
+        <li>Être capable d'expliquer les mesures compensatoires en cas d'installation en dérangement.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- IGH -->
+  <div class="card" style="border-color:var(--blue)">
+    <div class="card-title">Immeubles de Grande Hauteur (IGH) <span class="badge badge-key">Clé</span></div>
+    <div class="cards cards-3" style="margin-top:12px">
+      <div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Usage</th><th>Hauteur plancher dernier niveau</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Habitation</strong></td><td><span class="val">&gt; 50 m</span></td></tr>
+              <tr><td><strong>Autres usages</strong> (bureaux, hôtels, santé…)</td><td><span class="val">&gt; 28 m</span></td></tr>
+              <tr><td><strong>ITGH</strong></td><td><span class="val">&gt; 200 m</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout callout-blue" style="margin-top:10px">
+          <span class="callout-icon">ℹ️</span>
+          <div class="callout-body">La hauteur se mesure entre le sol accessible aux engins de secours et le plancher du dernier niveau accessible.</div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:.8rem;color:var(--text-3);margin-bottom:8px;font-weight:600">Classes IGH</p>
+        <ul class="list">
+          <li><strong>GH A</strong> — Habitation &gt; 50 m</li>
+          <li><strong>GH O</strong> — Hôtels &gt; 28 m</li>
+          <li><strong>GH R</strong> — Enseignement &gt; 28 m</li>
+          <li><strong>GH U</strong> — Sanitaires &gt; 28 m</li>
+          <li><strong>GH W</strong> — Bureaux &gt; 28 m</li>
+          <li><strong>GH Z</strong> — Usages mixtes</li>
+        </ul>
+      </div>
+      <div>
+        <p style="font-size:.8rem;color:var(--text-3);margin-bottom:8px;font-weight:600">Spécificités IGH</p>
+        <ul class="list">
+          <li>SSI catégorie A obligatoire</li>
+          <li>Escaliers à l'épreuve des fumées (sas / surpression)</li>
+          <li>Compartimentage CF par étage</li>
+          <li>Colonnes sèches ou humides à chaque niveau</li>
+          <li><span class="val">2 exercices/an</span> dont <span class="hl-red">1 nocturne</span></li>
+          <li>Ascenseurs pompiers prioritaires dédiés</li>
+          <li>Évacuation par compartiments successifs</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+  <div class="card">
+    <div class="card-title">Différences ERP / IGH <span class="badge badge-imp">Important</span></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Critère</th><th>ERP</th><th>IGH</th></tr></thead>
+        <tbody>
+          <tr><td>Référence principale</td><td>Arrêté 25 juin 1980 (mod.)</td><td>Décret 2011-246</td></tr>
+          <tr><td>Stratégie d'évacuation</td><td>Évacuation totale simultanée</td><td>Évacuation par compartiments successifs</td></tr>
+          <tr><td>Exercices annuels</td><td>1/an minimum</td><td>2/an dont 1 nocturne</td></tr>
+          <tr><td>SSI requis</td><td>Selon catégorie (A, B, C, D, E)</td><td>Catégorie A obligatoire</td></tr>
+          <tr><td>Colonnes incendie</td><td>Selon catégorie et type</td><td>À chaque niveau (sèches ou humides)</td></tr>
+          <tr><td>Accès pompiers</td><td>Voies d'accès engins</td><td>Ascenseurs pompiers dédiés + voies</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================ Séq. 2.2 à 2.4 — Fondamentaux, desserte, cloisonnement -->
+<section class="section anchor-target" id="fondamentaux">
+  <div class="section-header">
+    <div class="section-icon">📐</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 2 · Séquence 2.2 — 2h</div>
+      <h2 class="section-title">Principes généraux de sécurité incendie</h2>
+      <div class="section-subtitle">Implantation · Desserte · Voiries · Isolement · Matériaux · Cloisonnement</div>
+    </div>
+    <div class="duration-badge">⏱ 2h</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Principes fondamentaux en ERP</div>
+      <ul class="list">
+        <li><strong>Évacuation rapide</strong> ou mise à l'abri adaptée selon le type d'établissement et le public accueilli.</li>
+        <li><strong>Limitation de la propagation</strong> du feu et des fumées par l'isolement, le compartimentage et le désenfumage.</li>
+        <li><strong>Facilitation de l'intervention des secours</strong> : accès pompiers, plans, colonnes, locaux techniques identifiés.</li>
+        <li><strong>Maintien des moyens de secours</strong> toujours disponibles, visibles, accessibles et vérifiés.</li>
+        <li><strong>Prise en compte du public</strong> : valide ou non, connaissant ou non les lieux, éveillé ou dormant, calme ou paniqué.</li>
+      </ul>
+      <div class="callout callout-orange" style="margin-top:12px">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body"><div class="callout-title">Logique réglementaire</div>Les règles ERP ne visent pas seulement à éteindre un feu : elles visent d'abord à sauver des vies, retarder la propagation et gagner du temps pour l'évacuation et l'intervention.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Les grandes familles de règles</div>
+      <ul class="list">
+        <li><strong>Implantation & isolement</strong> — Limiter la propagation aux bâtiments voisins.</li>
+        <li><strong>Desserte</strong> — Garantir l'accès des engins de secours à tout moment.</li>
+        <li><strong>Matériaux & aménagements</strong> — Réaction au feu des matériaux d'aménagement intérieur.</li>
+        <li><strong>Cloisonnement</strong> — Compartimenter pour contenir le feu et les fumées.</li>
+        <li><strong>Dégagements</strong> — Sorties en nombre et largeur suffisants pour évacuer dans le temps imparti.</li>
+        <li><strong>Désenfumage</strong> — Maintenir les voies d'évacuation respirables et praticables.</li>
+        <li><strong>Éclairage de sécurité</strong> — Permettre l'évacuation en cas de coupure de courant.</li>
+        <li><strong>Moyens de secours</strong> — Extincteurs, RIA, colonnes, SSI.</li>
+        <li><strong>Alarme</strong> — Détecter et alerter sans délai.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section anchor-target" id="desserte">
+  <div class="section-header">
+    <div class="section-icon">🚒</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 2 · Séquence 2.3 — 2h</div>
+      <h2 class="section-title">Desserte des bâtiments & accès des secours</h2>
+      <div class="section-subtitle">Voies engins · Voies échelles · Volume de protection · Poteaux incendie</div>
+    </div>
+    <div class="duration-badge">⏱ 2h</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Types de voies d'accès <span class="badge badge-key">Clé</span></div>
+      <ul class="list">
+        <li><strong>Voie engins</strong> — Voie permettant la circulation des véhicules de secours (largeur ≥ 3 m, résistance, pente). Obligatoire pour tout ERP.</li>
+        <li><strong>Voie échelles</strong> — Voie permettant de positionner une grande échelle (largeur ≥ 4 m, libre sous obstacle ≥ 3,5 m). Requise pour les ERP dont la hauteur dépasse certains seuils.</li>
+        <li><strong>Volume de protection</strong> — Espace autour du bâtiment maintenu libre pour faciliter l'action des pompiers.</li>
+        <li><strong>Vacuité</strong> — Toutes les voies d'accès doivent rester libres de tout obstacle à tout moment (véhicules, mobilier urbain, travaux).</li>
+      </ul>
+      <div class="callout callout-red" style="margin-top:12px">
+        <span class="callout-icon">🚨</span>
+        <div class="callout-body">Signaler immédiatement tout encombrement des voies d'accès pompiers. Un véhicule mal stationné peut retarder les secours et mettre des vies en danger.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Poteaux et bouches incendie <span class="badge badge-memo">Mémo</span></div>
+      <ul class="list">
+        <li><strong>Poteaux incendie (PI)</strong> — DN 100 mm, pression <span class="val">≥ 1 bar</span>, débit <span class="val">≥ 60 m³/h</span>, peints en rouge.</li>
+        <li><strong>Bouches d'incendie (BI)</strong> — Encastrées au sol, couvercle carré, accessibles et signalées.</li>
+        <li>Distance max entre 2 PI : <span class="val">200 m</span> le long des voies pompiers.</li>
+        <li>Signaler immédiatement tout PI inaccessible (véhicule garé, neige, dommage).</li>
+        <li>Ne jamais brancher quoi que ce soit sur un PI sans autorisation.</li>
+        <li>Connaître leur localisation sur le plan du site.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Locaux à risques particuliers</div>
+      <ul class="list">
+        <li>Chaufferies, locaux groupes électrogènes, transformateurs, locaux techniques.</li>
+        <li>Stockages de combustibles ou de liquides inflammables.</li>
+        <li>Cuisines professionnelles.</li>
+        <li>Ces locaux sont isolés par des parois et des portes renforcées (CF 1h minimum en général).</li>
+        <li>Ventilations et coupures d'énergie spécifiques.</li>
+        <li>L'agent doit connaître leur localisation sur les plans du site.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Vérifications liées à la desserte lors des rondes</div>
+      <ul class="list">
+        <li>Absence de stationnement sur les voies engins et voies échelles.</li>
+        <li>Libre accès aux poteaux incendie (périmètre de 5 m dégagé).</li>
+        <li>Absence de dépôt ou d'obstacle sur les voies de circulation internes.</li>
+        <li>Plan d'intervention à jour et disponible pour les pompiers.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section anchor-target" id="cloisonnement">
+  <div class="section-header">
+    <div class="section-icon">🚪</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 2 · Séquence 2.4 — 2h</div>
+      <h2 class="section-title">Cloisonnement, compartimentage & isolement des risques</h2>
+      <div class="section-subtitle">Murs CF · Portes CF · Clapets CF · Compartiments · Escaliers protégés</div>
+    </div>
+    <div class="duration-badge">⏱ 2h</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Compartimentage <span class="badge badge-imp">Important</span></div>
+      <p style="font-size:.83rem;color:var(--text-2);margin-bottom:10px">Diviser l'établissement en zones coupe-feu indépendantes pour limiter la propagation :</p>
+      <ul class="list">
+        <li><strong>Murs coupe-feu</strong> — REI 60 ou REI 120 selon exigences ERP/IGH.</li>
+        <li><strong>Portes coupe-feu (PCF)</strong> — CF 1h ou CF 2h. Maintenues fermées ou avec ferme-portes automatiques déclenchés par fusible thermique ou signal SSI.</li>
+        <li><strong>Clapets coupe-feu (CCF)</strong> — Dans les gaines de ventilation, se ferment à l'alarme.</li>
+        <li><strong>Joints intumescents</strong> — Gonflent à la chaleur pour obstruer les passages (câbles, tuyauteries).</li>
+        <li><strong>Blocs-portes coupe-feu</strong> — Ensemble porte + cadre + ferme-porte + joints, certifié CF.</li>
+      </ul>
+      <div class="callout callout-red" style="margin-top:12px">
+        <span class="callout-icon">🚨</span>
+        <div class="callout-body"><div class="callout-title">Interdiction absolue</div>Ne JAMAIS caler une porte coupe-feu ouverte (extincteur, cale, coin de bois, porte-manteau). Infraction réglementaire grave pouvant engager la responsabilité pénale. À signaler immédiatement.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Escaliers protégés & sas <span class="badge badge-imp">Important</span></div>
+      <ul class="list">
+        <li><strong>Escalier encloisonné</strong> — Isolé du reste du bâtiment par des parois résistantes au feu et des blocs-portes adaptés.</li>
+        <li><strong>Sas</strong> — Volume tampon entre une circulation et un escalier, limitant l'entrée des fumées lors de l'ouverture des portes.</li>
+        <li><strong>Mise en surpression</strong> — Insufflation d'air dans un escalier protégé pour empêcher la pénétration des fumées.</li>
+        <li><strong>Escalier à l'air libre</strong> — Peut constituer un dégagement protégé s'il n'est pas susceptible d'être enfumé.</li>
+        <li>L'agent SSIAP 1 doit vérifier que ces volumes restent dégagés, fermants, non encombrés et non détournés de leur usage.</li>
+      </ul>
+      <div class="callout callout-orange" style="margin-top:12px">
+        <span class="callout-icon">⚠️</span>
+        <div class="callout-body">Une porte d'escalier protégée maintenue ouverte ou une gaine traversante non rebouchée annule en pratique l'efficacité du compartimentage.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Traversées et gaines techniques</div>
+      <ul class="list">
+        <li>Les gaines de ventilation sont des vecteurs de propagation rapide des fumées et des flammes entre compartiments.</li>
+        <li>Les traversées de murs CF par câbles, tuyaux ou gaines doivent être rebouchées avec des matériaux résistants au feu (mortier intumescent, manchon coupe-feu).</li>
+        <li>Signaler tout percement non rebouché lors des rondes : c'est une brèche dans le compartimentage.</li>
+        <li>Les faux plafonds peuvent masquer des défauts de compartimentage.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Cas particuliers types U et J <span class="badge badge-imp">Important</span></div>
+      <ul class="list">
+        <li><strong>Type U (hôpitaux)</strong> — Compartimentage en secteurs de soins. Évacuation progressive ou horizontale. Les patients alités sont maintenus en place si possible.</li>
+        <li><strong>Type J (EHPAD)</strong> — Résidents souvent non valides. Évacuation différée. Chambres = cellules coupe-feu individuelles avec porte CF.</li>
+        <li><strong>IGH</strong> — Compartimentage par étage. Chaque étage = compartiment CF minimum.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ Séquence 2.5 — Évacuation -->
+<section class="section anchor-target" id="evacuation">
+  <div class="section-header">
+    <div class="section-icon">🚶</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 2 · Séquence 2.5 — 1h30</div>
+      <h2 class="section-title">Évacuation du public & dégagements réglementaires</h2>
+      <div class="section-subtitle">Unités de passage · PMR · EAS · Signalisation · Exercices · Guide-file / Serre-file</div>
+    </div>
+    <div class="duration-badge">⏱ 1h30</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Dégagements réglementaires <span class="badge badge-key">Clé</span></div>
+      <ul class="list">
+        <li><strong>1 Unité de Passage (UP) = <span class="val">0,60 m</span></strong></li>
+        <li>Porte à 1 UP = <span class="val">0,90 m</span> minimum de largeur réelle</li>
+        <li>Au-delà de 20 personnes : <strong>2 sorties minimum</strong></li>
+        <li>Les issues doivent être opposées ou suffisamment éloignées pour ne pas être bloquées simultanément.</li>
+        <li>Hauteur libre sous poutre : <span class="val">≥ 2,00 m</span> dans les dégagements</li>
+      </ul>
+      <div class="table-wrap" style="margin-top:12px">
+        <table>
+          <thead><tr><th>Effectif</th><th>UP minimum</th><th>Largeur approx.</th></tr></thead>
+          <tbody>
+            <tr><td>Jusqu'à 20 personnes</td><td>1 UP</td><td>0,90 m</td></tr>
+            <tr><td>21 à 50 personnes</td><td>2 UP</td><td>1,40 m</td></tr>
+            <tr><td>51 à 100 personnes</td><td>3 UP</td><td>1,80 m</td></tr>
+            <tr><td>101 à 200 personnes</td><td>4 UP</td><td>2,40 m</td></tr>
+            <tr><td>Par tranche de 100 pers. supplémentaires</td><td>+1 UP</td><td>+0,60 m</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-orange" style="margin-top:10px">
+        <span class="callout-icon">📌</span>
+        <div class="callout-body"><div class="callout-title">Règle de la sortie bloquée</div>Le calcul doit intégrer la perte d'une sortie : les dégagements restants doivent suffire à évacuer l'effectif total (la sortie la plus large est retirée du calcul).</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Personnes à Mobilité Réduite (PMR) <span class="badge badge-key">Clé</span></div>
+      <ul class="list">
+        <li>Identifier les PMR à l'accueil dès leur entrée (carnet de présence PMR).</li>
+        <li><strong>Espace d'Attente Sécurisé (EAS)</strong> — Zone protégée CF 1h minimum, avec téléphone ou interphonie, signalée, proche d'un escalier protégé ou d'une issue. Obligatoire dans les IGH et ERP accessibles en étage.</li>
+        <li>Les PMR sont dirigées vers l'EAS et y attendent l'évacuation par les pompiers (portage si nécessaire).</li>
+        <li>Ne jamais utiliser les ascenseurs ordinaires pour les PMR en cas d'incendie.</li>
+        <li>Informer les pompiers de la localisation et du nombre de PMR à leur arrivée (communication prioritaire).</li>
+      </ul>
+      <div class="callout callout-blue" style="margin-top:10px">
+        <span class="callout-icon">ℹ️</span>
+        <div class="callout-body"><div class="callout-title">EAS ≠ Zone d'évacuation</div>L'EAS est une zone d'ATTENTE sécurisée. Ce sont les pompiers qui assurent ensuite l'évacuation définitive.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Types d'évacuation <span class="badge badge-memo">Mémo</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Type</th><th>Principe</th><th>Exemple</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Totale</strong></td><td>Tout le public quitte le bâtiment</td><td>Magasin, école, salle polyvalente</td></tr>
+            <tr><td><strong>Partielle</strong></td><td>Une partie seulement</td><td>Cellule commerciale, aile d'un bâtiment</td></tr>
+            <tr><td><strong>Horizontale</strong></td><td>Déplacement sur le même niveau vers un compartiment sûr</td><td>Hôpital, EHPAD</td></tr>
+            <tr><td><strong>Verticale</strong></td><td>Par escalier vers l'extérieur</td><td>Bureaux, hôtels, ERP classiques</td></tr>
+            <tr><td><strong>Différée / progressive</strong></td><td>Mise en sécurité par étapes</td><td>Type U, IGH, type J</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Rôles en évacuation <span class="badge badge-key">Clé</span></div>
+      <ul class="list">
+        <li><strong>Guide-file</strong> — Ouvre la marche, choisit l'itinéraire prévu, conduit vers le point de rassemblement.</li>
+        <li><strong>Serre-file</strong> — Ferme la marche, vérifie qu'aucune personne ne reste dans les locaux, ferme les portes sans les verrouiller.</li>
+        <li><strong>Chargé d'évacuation</strong> — Coordonne la manœuvre sur sa zone, remonte les anomalies et les personnes manquantes.</li>
+        <li>Le SSIAP 1 peut tenir l'un de ces rôles selon l'organisation et les consignes.</li>
+      </ul>
+      <div class="callout callout-green" style="margin-top:10px">
+        <span class="callout-icon">💡</span>
+        <div class="callout-body">Lors d'une évacuation : parler fort, donner des consignes simples, éviter tout jargon technique et empêcher les retours en arrière.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Procédure en cas d'alarme feu <span class="badge badge-key">Clé</span></div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Réception alarme</div><div class="step-desc">Note l'heure et la zone dans la main courante. Se rend sur place équipé d'un extincteur (délai max : <span class="val">3 min</span>).</div></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Sinistre confirmé</div><div class="step-desc">Alerter le SSIAP 2. Appeler le 18/112. Déclencher l'alarme générale si non automatique. Tenter extinction feu naissant si voie de fuite assurée.</div></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Évacuation</div><div class="step-desc">Diriger vers les issues les plus proches et sûres. Interdire l'usage des ascenseurs. Guider vers le point de rassemblement.</div></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">PMR</div><div class="step-desc">Identifier les PMR. Les diriger vers l'EAS. Transmettre leur localisation aux pompiers à leur arrivée.</div></div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Accueil pompiers</div><div class="step-desc">Se placer à l'entrée principale. Remettre le plan et le registre de sécurité. Indiquer localisation du sinistre et des victimes. Se mettre à la disposition du COS.</div></div></div>
+        <div class="step"><div class="step-num">6</div><div class="step-body"><div class="step-title">Point de rassemblement</div><div class="step-desc">Vérifier que tous ont évacué. Interdire le retour. Signaler les personnes manquantes aux pompiers.</div></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Exercices d'évacuation <span class="badge badge-exam">Examen</span></div>
+      <ul class="list">
+        <li>ERP catégories 1 à 4 : au moins <span class="val">1 exercice/an</span></li>
+        <li>IGH : au moins <span class="val">2 exercices/an</span> dont <span class="hl-red">1 nocturne obligatoire</span></li>
+        <li>Écoles (type R) : exercice dans le <span class="val">1er mois d'ouverture</span>, puis 2/an (dont 1 après vacances d'été)</li>
+        <li>Compte-rendu obligatoire : temps d'évacuation, effectif, anomalies.</li>
+        <li>Consignation dans le registre de sécurité (date, durée, observations).</li>
+        <li>Le SSIAP 1 participe activement : guidage, contrôle dégagements, chronométrage.</li>
+      </ul>
+      <div class="divider"></div>
+      <div class="card-title" style="margin-top:0">Point de rassemblement</div>
+      <ul class="list">
+        <li>Zone prédéfinie à l'extérieur, à <span class="val">≥ 30 m</span> du bâtiment en général, hors zone de chute possible.</li>
+        <li>Éloignée pour ne pas gêner les engins de secours.</li>
+        <li>Appel nominal ou comptage des personnes.</li>
+        <li>Ne laisser personne retourner dans le bâtiment sans autorisation explicite du COS.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Signalisation de sécurité incendie <span class="badge badge-imp">Important</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Couleur</th><th>Signification</th><th>Exemples</th></tr></thead>
+          <tbody>
+            <tr><td><strong style="color:var(--green)">VERT</strong></td><td>Voies d'évacuation, issues, premiers secours</td><td>Flèche sortie, pictogramme homme qui court, DEA</td></tr>
+            <tr><td><strong style="color:var(--red)">ROUGE</strong></td><td>Équipements de lutte incendie</td><td>Extincteur, RIA, déclencheur manuel, colonne sèche</td></tr>
+            <tr><td><strong style="color:var(--yellow)">JAUNE/ORANGE</strong></td><td>Avertissements et risques</td><td>Risque électrique, inflammables, chimique</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="list" style="margin-top:10px">
+        <li>Balisage lumineux : hauteur d'affichage <span class="val">≤ 1,80 m</span> du sol.</li>
+        <li>Plans d'évacuation affichés à chaque niveau, visibles depuis l'entrée de chaque zone.</li>
+        <li>Vérifier à chaque ronde : pictogrammes lisibles, non dégradés, non masqués.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================ Séquences 2.6, 2.7, 2.8 — Désenfumage, éclairage, moyens -->
+<section class="section anchor-target" id="desenfumage">
+  <div class="section-header">
+    <div class="section-icon">💨</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 2 · Séquence 2.6 — 4h</div>
+      <h2 class="section-title">Désenfumage</h2>
+      <div class="section-subtitle">Objectifs · Naturel · Mécanique · Volets · Remise en position d'attente</div>
+    </div>
+    <div class="duration-badge">⏱ 4h</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Rôle et objectifs du désenfumage <span class="badge badge-key">Clé</span></div>
+      <ul class="list">
+        <li>Maintenir praticables les voies d'évacuation en extrayant les fumées en hauteur.</li>
+        <li>Faciliter l'intervention des sapeurs-pompiers (visibilité, accessibilité).</li>
+        <li>Limiter la propagation des gaz toxiques entre compartiments.</li>
+        <li>Préserver des conditions de visibilité et de respirabilité dans les couloirs et escaliers.</li>
+        <li>Retarder l'embrasement généralisé (flash-over).</li>
+      </ul>
+      <div class="callout callout-blue" style="margin-top:10px">
+        <span class="callout-icon">ℹ️</span>
+        <div class="callout-body"><div class="callout-title">Principe physique</div>Les fumées chaudes montent (convection). Le désenfumage exploite ce principe : extraction en partie haute, amenée d'air frais en partie basse. On crée une couche de fumées en hauteur et une couche d'air respirable en bas.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Désenfumage naturel</div>
+      <ul class="list">
+        <li><strong>Exutoires de désenfumage (DENFC)</strong> en toiture — s'ouvrent automatiquement via le SMSI ou manuellement. Surface d'exutoire : <span class="val">1/100</span> de la surface de plancher minimum en ERP.</li>
+        <li>Ouvrants en façade (fenêtres motorisées).</li>
+        <li>Basé sur le tirage thermique : l'air chaud monte et est évacué par les ouvertures hautes.</li>
+        <li><strong>Amenées d'air en partie basse obligatoires</strong> (ouvertures basses : portes, grilles) — sans amenée d'air, l'extraction ne fonctionne pas.</li>
+        <li>Commandes manuelles accessibles aux pompiers (boîtiers jaunes en façade ou au PC).</li>
+        <li>Fonctionnement même sans électricité (ressort ou CO₂).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Désenfumage mécanique</div>
+      <ul class="list">
+        <li>Ventilateurs d'extraction (VMC-SE) en toiture ou en façade haute — aspirent les fumées.</li>
+        <li>Soufflage d'air neuf pour maintenir les cages d'escalier en surpression.</li>
+        <li>Mise en route automatique par le SMSI à l'alarme.</li>
+        <li>Commande manuelle possible au PC de sécurité (pupitre de commande).</li>
+        <li>Nécessite une alimentation électrique de sécurité (groupe électrogène ou onduleur).</li>
+      </ul>
+      <div class="callout callout-orange" style="margin-top:10px">
+        <span class="callout-icon">📌</span>
+        <div class="callout-body"><div class="callout-title">Volets de désenfumage (VDF)</div>Installés dans les gaines de ventilation. Fermés en temps normal. S'ouvrent dans la zone sinistrée et se ferment dans les autres zones lors du désenfumage pour orienter le flux d'extraction.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Rôle de l'agent SSIAP 1 en désenfumage</div>
+      <ul class="list">
+        <li>Vérifier lors des rondes : accessibilité des commandes d'exutoires (boîtiers au sol).</li>
+        <li>S'assurer que les exutoires ne sont pas bloqués (objets stockés dessous, neige, végétation).</li>
+        <li>Vérifier l'état des portes coupe-feu et de leurs joints.</li>
+        <li>En cas d'incendie : <span class="hl-red">ne PAS ouvrir les fenêtres dans les locaux non sinistrés</span> (risque de propagation des fumées).</li>
+        <li>En cas de sinistre : vérifier visuellement que le désenfumage s'est bien déclenché (volets ouverts, exutoires ouverts).</li>
+        <li><strong>Remise en position d'attente</strong> : après une alarme ou un test, s'assurer que tous les exutoires et volets sont remis en position normale. À effectuer uniquement avec accord du SSIAP 2.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section anchor-target" id="eclairage">
+  <div class="section-header">
+    <div class="section-icon">💡</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 2 · Séquence 2.7 — 2h</div>
+      <h2 class="section-title">Éclairage de sécurité</h2>
+      <div class="section-subtitle">BAES · BAEH · Éclairage d'évacuation · Éclairage d'ambiance · Entretien</div>
+    </div>
+    <div class="duration-badge">⏱ 2h</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">BAES et BAEH <span class="badge badge-imp">Important</span></div>
+      <ul class="list">
+        <li><strong>BAES (Bloc Autonome d'Éclairage de Sécurité)</strong> — Éclairage de balisage et d'évacuation. Autonomie <span class="val">≥ 1 heure</span>. S'allume automatiquement en cas de coupure de courant.</li>
+        <li><strong>BAEH (Bloc Autonome d'Éclairage d'Habitation)</strong> — Pour escaliers d'habitation.</li>
+        <li><strong>Éclairage d'évacuation</strong> — Balisage du cheminement vers les sorties (flèches, pictogrammes).</li>
+        <li><strong>Éclairage d'ambiance (anti-panique)</strong> — Éclairage général de sécurité pour éviter la panique dans les grandes surfaces.</li>
+      </ul>
+      <div class="callout callout-orange" style="margin-top:10px">
+        <span class="callout-icon">📌</span>
+        <div class="callout-body"><div class="callout-title">Maintenu / Non maintenu</div>Un BAES maintenu est allumé en permanence (halls, escaliers). Non maintenu : s'allume uniquement lors d'une coupure (économie d'énergie).</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Entretien élémentaire des BAES</div>
+      <ul class="list">
+        <li><strong>Vérification mensuelle lors des rondes</strong> : bloc allumé (si maintenu) ou voyant de charge vert (si non maintenu).</li>
+        <li><strong>Test de fonctionnement</strong> : touche de test pendant 1 seconde → le bloc s'allume sur sa batterie.</li>
+        <li><strong>Autonomie vérifiée annuellement</strong> : test de décharge pendant 1 heure.</li>
+        <li>Tout BAES défectueux doit être signalé et remplacé sans délai.</li>
+        <li>Changement d'une source lumineuse défectueuse (ampoule ou LED selon modèle).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section anchor-target" id="moyens-secours">
+  <div class="section-header">
+    <div class="section-icon">🧯</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 2 · Séquence 2.8 — 1h</div>
+      <h2 class="section-title">Panorama des moyens de secours</h2>
+      <div class="section-subtitle">Extincteurs · RIA · Colonnes · Sprinklers · Système d'alerte</div>
+    </div>
+    <div class="duration-badge">⏱ 1h</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Vue d'ensemble des moyens de secours</div>
+      <ul class="list">
+        <li><strong>Moyens d'extinction portables</strong> — Extincteurs portatifs (1ère intervention).</li>
+        <li><strong>Moyens d'extinction fixes</strong> — RIA, colonnes sèches/humides, sprinklers.</li>
+        <li><strong>Dispositifs facilitant l'action des pompiers</strong> — Colonnes sèches, poteaux incendie, escaliers dédiés, clés pompiers.</li>
+        <li><strong>Service de sécurité incendie</strong> — Personnel SSIAP 1, 2, 3.</li>
+        <li><strong>Système de Sécurité Incendie (SSI)</strong> — Détection, alarme, mise en sécurité.</li>
+        <li><strong>Système d'alerte</strong> — Téléphone, sonorisation, déclencheurs manuels.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Entretien des moyens — Responsabilités SSIAP 1</div>
+      <ul class="list">
+        <li>Contrôle visuel mensuel lors des rondes : scellé intact, manomètre zone verte, accessibilité.</li>
+        <li>Vérification annuelle par technicien agréé : contrôle de charge, pression, agent extincteur.</li>
+        <li>Révision complète tous les <span class="val">5 ans</span> (ou 10 ans selon modèle).</li>
+        <li>Signaler immédiatement toute anomalie au SSIAP 2 et consigner.</li>
+        <li>Remplacer tout extincteur utilisé, même partiellement.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ PARTIE 3 — INSTALLATIONS TECHNIQUES -->
+<section class="section anchor-target" id="electrique">
+  <div class="section-header">
+    <div class="section-icon">⚡</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 3 · Séquence 3.1 — 1h</div>
+      <h2 class="section-title">Installations électriques</h2>
+      <div class="section-subtitle">TGBT · Coupure d'urgence · AES · Groupes électrogènes · Conduite à tenir</div>
+    </div>
+    <div class="duration-badge">⏱ 1h</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Installations électriques et sécurité incendie</div>
+      <ul class="list">
+        <li><strong>TGBT (Tableau Général Basse Tension)</strong> — Local électrique principal. Accès réservé aux personnes habilitées.</li>
+        <li><strong>Coupure d'urgence</strong> — Coupure générale de l'installation électrique. <span class="hl-red">Ne doit PAS éteindre le SSI ni l'éclairage de sécurité</span> (alimentés sur AES séparée).</li>
+        <li><strong>AES (Alimentation de Sécurité)</strong> — Batterie d'accumulateurs. Autonomie <span class="val">≥ 12h en veille</span> et <span class="val">≥ 30 min en alarme</span>.</li>
+        <li><strong>Groupes électrogènes</strong> — Démarrage automatique sur coupure secteur. Délai de mise en service à vérifier.</li>
+        <li>En cas de défaillance de l'éclairage normal → les BAES prennent le relais automatiquement.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Conduite à tenir — Risques électriques</div>
+      <ul class="list">
+        <li>En cas d'incendie dans un local électrique sous tension : <span class="hl-red">jamais d'eau ni de mousse (conducteurs)</span>. Utiliser un extincteur CO₂ uniquement.</li>
+        <li>Couper l'alimentation électrique avant toute intervention si possible.</li>
+        <li>L'agent SSIAP 1 ne manipule les équipements électriques que s'il possède l'habilitation correspondante.</li>
+        <li>Signaler immédiatement tout câble dénudé, boîtier endommagé, ou échauffement anormal.</li>
+        <li>Consigner toute coupure dans la main courante avec heure et motif.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section anchor-target" id="ascenseurs">
+  <div class="section-header">
+    <div class="section-icon">🔼</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 3 · Séquence 3.2 — 2h</div>
+      <h2 class="section-title">Ascenseurs & nacelles</h2>
+      <div class="section-subtitle">Fonctionnement · Sécurité · Dégagement d'une personne bloquée · Nacelle</div>
+    </div>
+    <div class="duration-badge">⏱ 2h</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Ascenseurs — Connaissances de base</div>
+      <ul class="list">
+        <li><strong>Ascenseur</strong> — Transport de personnes. <strong>Monte-charge</strong> — Transport de marchandises (non accessible aux personnes en exploitation normale).</li>
+        <li>Dispositifs de sécurité : parachute (anti-chute libre), limiteur de vitesse, fin de course, porte palière verrouillée.</li>
+        <li>En cas d'alarme incendie : appel automatique au niveau d'évacuation (RDC) et mise hors service.</li>
+        <li><span class="hl-red">Jamais d'ascenseur ordinaire pour l'évacuation en cas d'incendie.</span> Exception : ascenseurs EVASAN dédiés dans les IGH.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Dégagement d'une personne bloquée <span class="badge badge-imp">Important</span></div>
+      <ul class="list">
+        <li>La procédure de dégagement est <strong>apprise en formation sur site</strong> (local technique spécifique à chaque installation).</li>
+        <li>Étapes générales : identifier le niveau de blocage, actionner la commande de manœuvre d'urgence, ouvrir les portes palières si la cabine est au niveau.</li>
+        <li>Ne jamais forcer une porte palière sans s'assurer que la cabine est bien au niveau correspondant (risque de chute).</li>
+        <li>Ne jamais pénétrer dans la gaine.</li>
+        <li>Appeler le service de maintenance si la situation dépasse les capacités d'intervention.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Nacelles élévatrices</div>
+      <ul class="list">
+        <li>Engins mobiles de travail en hauteur (PEMP : plate-forme élévatrice mobile de personnes).</li>
+        <li>En cas de panne en hauteur : procédure de descente d'urgence spécifique au matériel.</li>
+        <li>Mise en sécurité : stabiliser l'engin, alerter le technicien compétent.</li>
+        <li>La formation théorique doit être complétée sur site avant toute intervention réelle de dégagement.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section anchor-target" id="extinction-auto">
+  <div class="section-header">
+    <div class="section-icon">💧</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 3 · Séquence 3.3 — 2h</div>
+      <h2 class="section-title">Installations fixes d'extinction automatique</h2>
+      <div class="section-subtitle">Sprinklers · Brouillard d'eau · Entretien · Températures de déclenchement</div>
+    </div>
+    <div class="duration-badge">⏱ 2h</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Sprinklers (extinction automatique) <span class="badge badge-imp">Important</span></div>
+      <p style="font-size:.83rem;color:var(--text-2);margin-bottom:10px">Réseau de têtes sprinkler fusibles qui s'ouvrent individuellement à une température prédéfinie :</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Couleur ampoule</th><th>Température déclenchement</th><th>Usage typique</th></tr></thead>
+          <tbody>
+            <tr><td><strong style="color:#FF6600">Orange</strong></td><td>57°C</td><td>Locaux tempérés (bureaux, magasins)</td></tr>
+            <tr><td><strong style="color:#CC0000">Rouge</strong></td><td>68°C</td><td>Standard — le plus courant</td></tr>
+            <tr><td><strong style="color:#CCCC00">Jaune</strong></td><td>79°C</td><td>Locaux légèrement chauds</td></tr>
+            <tr><td><strong style="color:#00AA00">Vert</strong></td><td>93°C</td><td>Locaux chauds</td></tr>
+            <tr><td><strong style="color:#4444FF">Bleu</strong></td><td>141°C</td><td>Locaux très chauds (séchoirs)</td></tr>
+            <tr><td><strong style="color:#880088">Violet</strong></td><td>182°C</td><td>Cuisines industrielles</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="list" style="margin-top:10px">
+        <li><span class="hl-red">Chaque tête s'ouvre individuellement</span> au foyer concerné (pas toutes en même temps).</li>
+        <li>La tête est sensible à la <strong>température</strong>, pas à la fumée ni au son.</li>
+        <li>Ne jamais obstruer une tête sprinkler (stockage en hauteur, décorations, peinture).</li>
+        <li>Tout déclenchement = signalement immédiat au SSIAP 2 + pompiers + consignation registre.</li>
+        <li>Remplacement uniquement par un technicien qualifié agréé.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Types d'installations et entretien</div>
+      <ul class="list">
+        <li><strong>Installation sous eau (wet pipe)</strong> — Réseau toujours sous pression d'eau. Le plus courant.</li>
+        <li><strong>Installation sous air (dry pipe)</strong> — Pour locaux soumis au gel. Réseau rempli d'air ou d'azote.</li>
+        <li><strong>Brouillard d'eau (water mist)</strong> — Gouttelettes fines, économie d'eau, moins de dégâts, efficace sur feux B et zones confinées.</li>
+        <li><strong>Entretien élémentaire par l'agent</strong> : vérifier l'absence de corrosion sur les têtes, l'accessibilité au robinet principal, l'absence d'obstruction des têtes.</li>
+        <li>Vérification annuelle par technicien agréé.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section anchor-target" id="colonnes">
+  <div class="section-header">
+    <div class="section-icon">🛢️</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 3 · Séquence 3.4 — 1h</div>
+      <h2 class="section-title">Colonnes sèches & colonnes humides</h2>
+      <div class="section-subtitle">Composition · Positionnement · Entretien · Différences</div>
+    </div>
+    <div class="duration-badge">⏱ 1h</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Colonnes sèches & humides <span class="badge badge-key">Clé</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Type</th><th>Fonctionnement</th><th>Usage</th><th>Raccords</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><strong>Colonne sèche</strong></td>
+              <td>Canalisation vide, alimentée par les pompiers depuis la rue via raccord normalisé DN 65</td>
+              <td>Bâtiments &gt; 28 m (hors habitation), obligatoire IGH</td>
+              <td>Alimentation DN 65 — Prises DN 40 ou 45 à chaque niveau</td>
+            </tr>
+            <tr>
+              <td><strong>Colonne humide (en charge)</strong></td>
+              <td>Toujours sous pression eau, utilisable immédiatement avec robinets d'incendie armés couplés</td>
+              <td>IGH &gt; 50 m habitation, grands ERP</td>
+              <td>Robinets normalisés DN 45 à chaque niveau</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-red" style="margin-top:10px">
+        <span class="callout-icon">🔀</span>
+        <div class="callout-body"><div class="callout-title">À ne pas confondre</div>La colonne sèche est vide et alimentée par les pompiers depuis la rue. La colonne humide est toujours sous pression et utilisable immédiatement.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Entretien et vérification</div>
+      <ul class="list">
+        <li>Vérifier à chaque ronde : accessibilité, signalisation, absence d'obstruction, tête de colonne non endommagée.</li>
+        <li>Le bouchon de la colonne sèche doit être remis en place après toute intervention.</li>
+        <li>Porte du local colonne ouvrable à tout moment (clé accessible aux pompiers).</li>
+        <li>Signaler toute anomalie : rouille, bouchon manquant, obstructions, dommage visible.</li>
+        <li>Vérification périodique par technicien agréé (essai de mise en pression, contrôle des joints).</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Robinets Incendie Armés (RIA) <span class="badge badge-imp">Important</span></div>
+      <p style="font-size:.83rem;color:var(--text-2);margin-bottom:10px">Dispositif fixe alimenté en eau sous pression permanente :</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Diamètre</th><th>Débit min.</th><th>Portée</th><th>Usage</th></tr></thead>
+          <tbody>
+            <tr><td><strong>DN 19/6</strong></td><td><span class="val">26 L/min</span></td><td>15 m</td><td>ERP courants, bureaux</td></tr>
+            <tr><td><strong>DN 25</strong></td><td><span class="val">52 L/min</span></td><td>15 à 20 m</td><td>ERP, stockages</td></tr>
+            <tr><td><strong>DN 33</strong></td><td><span class="val">82 L/min</span></td><td>15 à 20 m</td><td>Risques importants</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="list" style="margin-top:10px">
+        <li>Toujours <strong>déployer entièrement le tuyau avant d'ouvrir la vanne</strong> (risque de nœud sous pression).</li>
+        <li>À 2 opérateurs de préférence (1 au robinet, 1 avec le jet).</li>
+        <li>Vérifier l'accessibilité à chaque ronde.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Réseau incendie extérieur & poteaux incendie</div>
+      <ul class="list">
+        <li><strong>Poteaux incendie (PI)</strong> — DN 100 mm, pression ≥ <span class="val">1 bar</span>, débit ≥ <span class="val">60 m³/h</span>, peints en rouge</li>
+        <li><strong>Bouches d'incendie (BI)</strong> — encastrées au sol, couvercle carré, accessibles et signalées</li>
+        <li>Connaître leur localisation sur le plan du site et leur accessibilité en toute saison</li>
+        <li>Distance max entre 2 PI : <strong><span class="val">200 m</span></strong> (le long des voies accessibles pompiers)</li>
+        <li>Signaler immédiatement tout PI inaccessible (véhicule garé, neige), endommagé ou dont l'accès est bloqué</li>
+        <li>Ne jamais brancher quoi que ce soit sur un poteau incendie sans autorisation</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Couverture anti-feu & extincteurs sur cuisines</div>
+      <ul class="list">
+        <li><strong>Couverture anti-feu</strong> — Utilisée sur les <strong>feux d'huile dans un récipient</strong> (casserole, poêle) — classe F</li>
+        <li>Approcher par le bas, couvrir entièrement le récipient, <strong>ne pas soulever après</strong></li>
+        <li>Couper l'alimentation gaz ou électricité avant ou simultanément</li>
+        <li>Laisser refroidir <strong>≥ 1h</strong> avant de découvrir</li>
+        <li>Extincteur <strong>wet chemical (classe F)</strong> : vaporiser doucement en cercles sur la surface</li>
+      </ul>
+      <div class="callout callout-red" style="margin-top:10px">
+        <span class="callout-icon">🚫</span>
+        <div class="callout-body"><div class="callout-title">Danger absolu — Eau + huile enflammée</div>Ne jamais utiliser d'eau sur un feu de friteuse. Vaporisation explosive : l'eau (ébullition à 100°C) se vaporise instantanément en projetant l'huile enflammée à grande distance. Accidents mortels fréquents.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ Séquence 3.5 — SSI -->
+<section class="section anchor-target" id="ssi">
+  <div class="section-header">
+    <div class="section-icon">🔔</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 3 · Séquence 3.5 — 3h</div>
+      <h2 class="section-title">Système de Sécurité Incendie (SSI)</h2>
+      <div class="section-subtitle">SDI · SMSI · CMSI · DAS · Catégories · Détecteurs · Alarmes · Zones</div>
+    </div>
+    <div class="duration-badge">⏱ 3h</div>
+  </div>
+
+  <div class="cards cards-2">
+    <div class="card" style="border-color:var(--teal)">
+      <div class="card-title">Définition SSI (norme NF S61-931) <span class="badge badge-key">Clé</span></div>
+      <p style="font-size:.9rem;color:var(--text-2);line-height:1.6">Le SSI est l'ensemble des équipements automatiques et manuels chargés de <strong style="color:var(--text)">détecter l'incendie</strong> (SDI = Système de Détection Incendie), de le <strong style="color:var(--text)">signaler</strong> et de <strong style="color:var(--text)">mettre l'établissement en sécurité</strong> (SMSI = Système de Mise en Sécurité Incendie). Un SSI de catégorie A est le plus complet.</p>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Catégories SSI <span class="badge badge-key">Clé</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Cat.</th><th>Niveau</th><th>Composants</th><th>Établissements</th></tr></thead>
+          <tbody>
+            <tr><td><strong>A</strong></td><td>Maximum</td><td>SDI complet + SMSI complet (CMSI + tous DAS)</td><td>IGH, grands ERP 1ère et 2ème catégorie</td></tr>
+            <tr><td><strong>B</strong></td><td>Intermédiaire</td><td>SDI complet + SMSI partiel</td><td>ERP 3ème catégorie certains types</td></tr>
+            <tr><td><strong>C</strong></td><td>Simplifié</td><td>SMSI autonome sans SDI centralisé</td><td>ERP 4ème catégorie</td></tr>
+            <tr><td><strong>D</strong></td><td>Basique</td><td>Alarme seule (DM + diffuseurs sonores)</td><td>ERP 5ème catégorie</td></tr>
+            <tr><td><strong>E</strong></td><td>Minimum</td><td>Simple avertisseur autonome (DAAF)</td><td>Habitations</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Composants du SDI (Système de Détection Incendie)</div>
+      <ul class="list">
+        <li><strong>Détecteurs automatiques</strong> — Répartis dans toutes les zones surveillées.</li>
+        <li><strong>Déclencheurs manuels (DM)</strong> — Boîtiers rouges à briser/enfoncer. Placés <span class="val">tous les 30 m maximum</span> le long des dégagements.</li>
+        <li><strong>ECS (Équipement de Contrôle et Signalisation)</strong> — Tableau de signalisation central, cœur du SDI.</li>
+        <li><strong>AES (Alimentation de Sécurité)</strong> — Batterie de sécurité. Autonomie <span class="val">≥ 12h en veille</span> et <span class="val">≥ 30 min en alarme</span>.</li>
+        <li>Câblage CR1-C1 résistant au feu : maintien du câble intact pendant l'incendie.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Types de détecteurs automatiques <span class="badge badge-imp">Important</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Type</th><th>Principe</th><th>Usage préférentiel</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Ionique (α)</strong></td><td>Ionisation par particules alpha, perturbée par fumées invisibles</td><td>Combustion vive, hydrocarbures volatils</td></tr>
+            <tr><td><strong>Optique (OP)</strong></td><td>Diffusion lumière infrarouge par fumées visibles</td><td>Combustion lente, feux couvants, bois, plastiques. <strong>Le plus répandu.</strong></td></tr>
+            <tr><td><strong>Thermique fixe (TF)</strong></td><td>Seuil de température fixe (57°C, 68°C…)</td><td>Cuisines, locaux chauds, garages</td></tr>
+            <tr><td><strong>Thermodifférentiel (TD)</strong></td><td>Détecte la vitesse de montée en température</td><td>Locaux à température variable (chaufferies)</td></tr>
+            <tr><td><strong>Linéaire (barrière IR)</strong></td><td>Barrière infrarouge entre émetteur et récepteur</td><td>Entrepôts, ateliers, halls (portée jusqu'à 100 m)</td></tr>
+            <tr><td><strong>Flammes UV/IR</strong></td><td>Rayonnement UV ou IR des flammes nues</td><td>Hydrocarbures, zones ATEX</td></tr>
+            <tr><td><strong>Gaz</strong></td><td>Concentration d'un gaz spécifique (CO, gaz naturel, GPL)</td><td>Parkings (CO), locaux gaz, chaufferies</td></tr>
+            <tr><td><strong>Aspiration (ASD)</strong></td><td>Prélèvement d'air analysé en continu</td><td>Salles informatiques, archives, musées</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">SMSI — Mise en Sécurité Incendie</div>
+      <p style="font-size:.83rem;color:var(--text-2);margin-bottom:10px">Ensemble d'actions automatiques déclenchées par le SSI à l'alarme :</p>
+      <ul class="list">
+        <li>Déverrouillage des issues de secours (portes à déverrouillage électromagnétique).</li>
+        <li>Fermeture des portes coupe-feu motorisées (PCF) et clapets coupe-feu (CCF).</li>
+        <li>Mise en route du désenfumage (exutoires, volets, ventilateurs).</li>
+        <li>Coupure de certaines alimentations électriques (cuisines, locaux à risque).</li>
+        <li>Appel des ascenseurs en niveau d'évacuation (RDC) et mise hors service.</li>
+        <li>Déclenchement de la diffusion de l'alarme sonore (voire vocale).</li>
+        <li>Activation de l'éclairage de sécurité.</li>
+      </ul>
+      <div class="callout callout-blue" style="margin-top:10px">
+        <span class="callout-icon">ℹ️</span>
+        <div class="callout-body"><div class="callout-title">DAS à sécurité positive</div>En cas de coupure électrique, le DAS se met en position de sécurité : fermé pour les coupe-feu, ouvert pour les issues de secours.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">CMSI & DAS <span class="badge badge-imp">Important</span></div>
+      <ul class="list">
+        <li><strong>CMSI (Centralisateur de Mise en Sécurité Incendie)</strong> — Centralise les ordres de mise en sécurité vers les DAS. Peut être intégré à l'ECS ou séparé.</li>
+        <li><strong>DAS (Dispositifs Actionnés de Sécurité)</strong> — Équipements pilotés par le CMSI :
+          <br>— Portes coupe-feu motorisées (DCF)
+          <br>— Clapets coupe-feu dans les gaines (CCF)
+          <br>— Volets de désenfumage (VDF)
+          <br>— Exutoires de désenfumage (DENFC)
+          <br>— Déverrouilleurs électromagnétiques des issues
+        </li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Zones SSI <span class="badge badge-key">Clé</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Sigle</th><th>Signification</th><th>À retenir</th></tr></thead>
+          <tbody>
+            <tr><td><strong>ZD</strong></td><td>Zone de Détection</td><td>Regroupe les détecteurs auto et DM rattachés à une même signalisation</td></tr>
+            <tr><td><strong>ZA</strong></td><td>Zone d'Alarme</td><td>Zone dans laquelle l'alarme est diffusée</td></tr>
+            <tr><td><strong>ZS</strong></td><td>Zone de Sécurité</td><td>Zone sur laquelle s'appliquent les fonctions de mise en sécurité</td></tr>
+            <tr><td><strong>ZC</strong></td><td>Zone de Compartimentage</td><td>Commande portes/clapets coupe-feu</td></tr>
+            <tr><td><strong>ZF</strong></td><td>Zone de Désenfumage</td><td>Commande exutoires, volets, ventilateurs</td></tr>
+            <tr><td><strong>UGA</strong></td><td>Unité de Gestion d'Alarme</td><td>Diffuse l'alarme restreinte, générale ou sélective</td></tr>
+            <tr><td><strong>UGIS</strong></td><td>Unité de Gestion Centralisée des Issues de Secours</td><td>Commande les dispositifs de verrouillage/déverrouillage des issues</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Niveaux d'alarme en ERP <span class="badge badge-key">Clé</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Niveau</th><th>Désignation</th><th>Déclenchement</th><th>Conséquence</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1</strong></td><td>Alarme restreinte</td><td>Tout déclencheur (auto ou manuel)</td><td>Alerte uniquement les agents SSIAP. Vérification avant alarme générale.</td></tr>
+            <tr><td><strong>2a</strong></td><td>Alarme générale sélective</td><td>Confirmation sinistre</td><td>Évacuation d'une zone/compartiment uniquement (ex: hôpital type U)</td></tr>
+            <tr><td><strong>2b</strong></td><td>Alarme générale</td><td>Confirmation sinistre</td><td>Évacuation totale de l'établissement</td></tr>
+            <tr><td><strong>3</strong></td><td>Signal de fin d'alerte</td><td>Décision du COS pompiers</td><td>Abandon complet du site, retour autorisé uniquement par pompiers</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout callout-orange" style="margin-top:10px">
+        <span class="callout-icon">⏱</span>
+        <div class="callout-body"><div class="callout-title">Délai de levée de doute</div>En ERP, délai maximal de <strong>3 minutes</strong> pour effectuer la levée de doute avant déclenchement de l'évacuation générale.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Lecture du tableau de signalisation (ECS)</div>
+      <ul class="list">
+        <li>Affiche la zone géographique en alarme (numéro, bâtiment, étage).</li>
+        <li>Signale les dérangements (défaut détecteur, coupure câble, batterie faible).</li>
+        <li>L'agent doit savoir lire et interpréter chaque voyant : <span class="hl-red">rouge = alarme</span>, <span class="hl-green">vert = normal</span>, jaune = dérangement.</li>
+        <li><span class="hl-red">Acquittement d'une alarme ≠ extinction du feu ni réarmement du SSI.</span></li>
+        <li>Consigner systématiquement toute alarme dans la main courante.</li>
+        <li>Toujours sous AES — en cas de coupure secteur, la batterie prend le relais.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Types d'équipement d'alarme <span class="badge badge-memo">Mémo</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Type</th><th>Composition simplifiée</th><th>Usage courant</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Type 1</strong></td><td>SSI avec SDI + UGA</td><td>Établissements les plus exigeants</td></tr>
+            <tr><td><strong>Type 2a</strong></td><td>UGA 2 + BAAS / diffusion sélective</td><td>ERP avec alarme structurée</td></tr>
+            <tr><td><strong>Type 2b</strong></td><td>UGA 2 + diffuseurs sonores</td><td>ERP intermédiaires</td></tr>
+            <tr><td><strong>Type 3</strong></td><td>BAAS type Ma / Pr</td><td>Petits établissements</td></tr>
+            <tr><td><strong>Type 4</strong></td><td>Dispositif simple (sifflet, trompe, sonnerie)</td><td>Très petits ERP</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================ PARTIE 4 — RÔLE ET MISSIONS -->
+<section class="section anchor-target" id="service">
+  <div class="section-header">
+    <div class="section-icon">👮</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 4 · Séquence 4.1 — 1h</div>
+      <h2 class="section-title">Le service de sécurité incendie</h2>
+      <div class="section-subtitle">Arrêté de référence · Missions · Composition · Qualification · Agrément</div>
+    </div>
+    <div class="duration-badge">⏱ 1h</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Organisation du service de sécurité</div>
+      <ul class="list">
+        <li>Le service de sécurité est constitué du personnel SSIAP affecté à l'établissement.</li>
+        <li>Les effectifs requis sont définis par l'arrêté du 2 mai 2005 modifié en fonction de la catégorie et du type d'ERP ou d'IGH.</li>
+        <li>Le service est placé sous l'autorité de l'exploitant de l'établissement.</li>
+        <li>En exploitation, le SSIAP 2 dirige le service et les agents SSIAP 1.</li>
+        <li>La continuité de service est une obligation réglementaire : l'agent ne quitte jamais son poste sans être relevé.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Carte professionnelle CNAPS</div>
+      <ul class="list">
+        <li>Délivrée après formation + examen réussi.</li>
+        <li>Obligatoire pour exercer en tant qu'agent de sécurité incendie.</li>
+        <li>À renouveler après chaque MAC (durée de validité : 5 ans).</li>
+        <li>Centres de formation agréés par le CNAPS (Conseil National des Activités Privées de Sécurité).</li>
+        <li>Casier judiciaire vierge (bulletin B2) requis.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section anchor-target" id="consignes">
+  <div class="section-header">
+    <div class="section-icon">📝</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 4 · Séquence 4.2 — 1h</div>
+      <h2 class="section-title">Consignes de sécurité & main courante</h2>
+      <div class="section-subtitle">Consignes générales · Consignes particulières · Rédaction · Obligations</div>
+    </div>
+    <div class="duration-badge">⏱ 1h</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Consignes de sécurité <span class="badge badge-key">Clé</span></div>
+      <ul class="list">
+        <li><strong>Consignes générales</strong> — Applicables à l'ensemble de l'établissement. Définissent les comportements en cas d'alarme, d'évacuation, de sinistre. Rédigées par le SSIAP 2/3.</li>
+        <li><strong>Consignes particulières</strong> — Spécifiques à une zone à risque, un local technique, une activité particulière (ex : consigne de travaux, consigne cuisine). Peuvent être rédigées pour un poste donné.</li>
+        <li>L'agent SSIAP 1 doit connaître et appliquer les consignes, mais ne peut pas les modifier.</li>
+        <li>Toute difficulté d'application est signalée au SSIAP 2.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">La main courante <span class="badge badge-key">Clé</span></div>
+      <ul class="list">
+        <li>Document de traçabilité des événements de la vacation. Rédigé en temps réel.</li>
+        <li><strong>Mentions obligatoires</strong> : heure, nature de l'événement, localisation précise, mesures prises, résultat, suite donnée.</li>
+        <li>Style factuel, chronologique, précis et sans ambiguïté.</li>
+        <li>Signature de l'agent + visa du SSIAP 2 en fin de vacation.</li>
+        <li>Document juridique — <span class="hl-red">Ne jamais falsifier ni modifier a posteriori.</span></li>
+        <li>Conservée au minimum <span class="val">5 ans</span>. Consultable lors des visites de la commission.</li>
+        <li>Peut être demandée en cas de sinistre ou d'accident (élément de preuve).</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section anchor-target" id="pc-securite">
+  <div class="section-header">
+    <div class="section-icon">🖥️</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 4 · Séquence 4.3 — 2h30</div>
+      <h2 class="section-title">Poste de sécurité (PC Sécurité)</h2>
+      <div class="section-subtitle">Équipements · UAE · GTC · Surveillance · Documents obligatoires</div>
+    </div>
+    <div class="duration-badge">⏱ 2h30</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Équipements du PC sécurité</div>
+      <ul class="list">
+        <li>Tableau SSI (ECS) et CMSI.</li>
+        <li>CCTV (vidéosurveillance).</li>
+        <li>Interphonie / contrôle d'accès.</li>
+        <li>GTC (Gestion Technique Centralisée) : supervision technique des équipements.</li>
+        <li>UAE (Unité d'Aide à l'Exploitation) : logiciel d'aide à la gestion des alarmes.</li>
+        <li>Moyens de communication : radio chargée, téléphone, téléphone pompiers dédié (IGH).</li>
+        <li>DEA (Défibrillateur) et trousse de secours à proximité.</li>
+        <li>Plans de l'établissement en permanence.</li>
+        <li>Registre de sécurité et main courante à portée de main.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Gestion du PC sécurité</div>
+      <ul class="list">
+        <li>Jamais laissé sans surveillance pendant les heures d'exploitation.</li>
+        <li>Coordonnées d'urgence affichées à portée de main (18, 15, 17, 112, SSIAP 2, direction).</li>
+        <li>Équipements de communication en état de fonctionnement vérifiés à chaque prise de poste.</li>
+        <li>Surveillance des reports (alarmes techniques, défauts) et enregistrement dans la main courante.</li>
+        <li>Réception des appels d'alerte : noter heure, interlocuteur, nature du signalement, mesures.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section anchor-target" id="rondes">
+  <div class="section-header">
+    <div class="section-icon">👁️</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 4 · Séquence 4.4 — 4h</div>
+      <h2 class="section-title">Rondes de sécurité & surveillance des travaux</h2>
+      <div class="section-subtitle">Objectifs · Points de contrôle · Permis de feu · Travaux en site occupé · Types de rondes</div>
+    </div>
+    <div class="duration-badge">⏱ 4h</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Objectifs des rondes <span class="badge badge-key">Clé</span></div>
+      <ul class="list">
+        <li>Détecter les anomalies, départs de feu (fumées, odeurs, chaleur anormale).</li>
+        <li>Vérifier l'état et la disponibilité des équipements de sécurité incendie.</li>
+        <li>S'assurer de la libre circulation dans les dégagements et issues de secours.</li>
+        <li>Contrôler les locaux techniques (TGBT, chaufferie, local CVC, groupes électrogènes).</li>
+        <li>Vérifier la fermeture des locaux sensibles (archives, stockage inflammables).</li>
+        <li>Surveiller les zones de travaux (risques accrus).</li>
+        <li>Détecter les comportements à risque (fumeurs en zones interdites, encombrement dégagements).</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Types de rondes <span class="badge badge-memo">Mémo</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Type</th><th>Objectif</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Ouverture</strong></td><td>Mettre le site en configuration d'exploitation</td></tr>
+            <tr><td><strong>Fermeture</strong></td><td>Mettre le site en sécurité après activité</td></tr>
+            <tr><td><strong>Technique</strong></td><td>Contrôler les équipements et locaux à risques</td></tr>
+            <tr><td><strong>Aléatoire</strong></td><td>Éviter les habitudes, détecter comportements à risque (horaires variables)</td></tr>
+            <tr><td><strong>Compensatoire</strong></td><td>Compenser une défaillance technique (détection hors service, BAES défaillants)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Points de contrôle systématiques</div>
+      <ul class="list">
+        <li><strong>Extincteurs</strong> — Scellé intact, manomètre zone verte, date vérification valide, accessibilité totale.</li>
+        <li><strong>RIA</strong> — Robinet accessible, tuyau en bon état, enroulé correctement, vanne fermée, pas de fuite.</li>
+        <li><strong>Portes coupe-feu</strong> — Fermeture correcte, joint intact et souple, ferme-porte fonctionnel, pas de cale.</li>
+        <li><strong>Issues de secours</strong> — Non cadenassées, dégagées intérieur ET extérieur, signalisation BAES allumé.</li>
+        <li><strong>BAES</strong> — Tous allumés (si maintenu), voyant de charge vert (si non maintenu).</li>
+        <li><strong>Détecteurs incendie</strong> — Non couverts, ni obstrués (peinture, sacs, cartons).</li>
+        <li><strong>Déclencheurs manuels</strong> — Accessibles, vitrine intacte, non couverts.</li>
+        <li><strong>Exutoires désenfumage</strong> — Accessibles, non bloqués, commandes au sol accessibles.</li>
+        <li><strong>Plans d'évacuation</strong> — Lisibles, non dégradés, non masqués.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Conduite à tenir face à une anomalie de ronde</div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Constater</div><div class="step-desc">Identifier précisément : localisation, nature, gravité, impact sur la sécurité.</div></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Mettre en sécurité</div><div class="step-desc">Faire cesser le danger immédiat si possible sans se mettre en péril (remettre une porte CF, dégager une issue).</div></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Rendre compte</div><div class="step-desc">Informer sans délai le SSIAP 2 si l'anomalie touche un moyen de secours, une issue ou un local à risques.</div></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Consigner</div><div class="step-desc">Écrire dans la main courante : heure, lieu, faits, mesures immédiates prises.</div></div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Suivre</div><div class="step-desc">Vérifier que l'anomalie a bien été traitée et qu'aucune mesure compensatoire n'a été oubliée.</div></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Le permis de feu <span class="badge badge-key">Clé</span></div>
+      <p style="font-size:.83rem;color:var(--text-2);margin-bottom:10px">Document autorisant des travaux par point chaud avec mesures de prévention définies :</p>
+      <ul class="list">
+        <li>Signé par : l'exécutant, le responsable des travaux, et le responsable sécurité (SSIAP 2 ou 3).</li>
+        <li>Mentionne : nature des travaux, zone précise, date/heure, durée, mesures préventives.</li>
+        <li>Combustibles retirés ou protégés dans le périmètre (rayon <span class="val">5 m</span>).</li>
+        <li>Extincteur adapté à portée de main de l'intervenant.</li>
+        <li>Surveillance continue pendant ET <span class="val">1 heure après</span> la fin des travaux (risque de point chaud résiduel).</li>
+        <li>Valable pour une durée limitée (généralement la journée).</li>
+        <li>À conserver dans le registre de sécurité.</li>
+      </ul>
+      <div class="callout callout-red" style="margin-top:10px">
+        <span class="callout-icon">🚨</span>
+        <div class="callout-body">Les travaux sont une cause majeure d'incendie : points chauds (soudure, meulage, chalumeau), poussières combustibles, câblages provisoires, neutralisation temporaire de détecteurs.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Gestion des accès et contrôle</div>
+      <ul class="list">
+        <li>Vérifier l'identité et l'habilitation des intervenants extérieurs (entreprises, livraisons).</li>
+        <li>S'assurer que tout intervenant en zone technique est accompagné ou dispose d'une autorisation écrite.</li>
+        <li>Signaler toute présence suspecte ou comportement anormal au SSIAP 2.</li>
+        <li>Ne jamais permettre l'accès aux locaux techniques sans autorisation explicite.</li>
+        <li>Tenir un registre des entrées/sorties dans la main courante.</li>
+        <li>Vérifier la fermeture des accès en fin d'exploitation.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section anchor-target" id="extinction-manuel">
+  <div class="section-header">
+    <div class="section-icon">🧯</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 4 · Séquence 4.5 — 4h</div>
+      <h2 class="section-title">Mise en œuvre des moyens d'extinction</h2>
+      <div class="section-subtitle">Méthode PASS · Extincteurs · RIA · Protection individuelle</div>
+    </div>
+    <div class="duration-badge">⏱ 4h</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Extincteurs portatifs — Agents et usages <span class="badge badge-key">Clé</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Agent</th><th>Classes</th><th>Mode d'action</th><th>Attention</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Eau pulvérisée</strong></td><td>A (+ B avec additif)</td><td>Refroidissement</td><td><span class="hl-red">INTERDIT sur électricité sous tension</span>. Distance ≥ 1 m.</td></tr>
+            <tr><td><strong>Poudre ABC</strong></td><td>A / B / C</td><td>Inhibition chimique</td><td>Polyvalent mais salit. <span class="hl-red">INTERDIT salles serveurs, archives, appareillages électroniques.</span></td></tr>
+            <tr><td><strong>Poudre BC</strong></td><td>B / C</td><td>Inhibition chimique</td><td><span class="hl-red">NE convient PAS aux feux de solides (A).</span></td></tr>
+            <tr><td><strong>CO₂</strong></td><td>B / élec.</td><td>Étouffement + refroidissement</td><td>Propre, sans résidu. Très froid (−78°C). <span class="hl-red">RISQUE d'asphyxie en espace confiné.</span> Tenir par la poignée isolée.</td></tr>
+            <tr><td><strong>Wet chemical (mousse K)</strong></td><td>F</td><td>Saponification</td><td><span class="hl-red">UNIQUEMENT pour huiles de cuisson.</span></td></tr>
+            <tr><td><strong>Poudre classe D</strong></td><td>D</td><td>Étouffement spécifique</td><td><span class="hl-red">UNIQUEMENT pour métaux.</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Méthode PASS — Utilisation extincteur <span class="badge badge-key">Clé</span></div>
+      <div class="steps">
+        <div class="step"><div class="step-num">P</div><div class="step-body"><div class="step-title">Piocher (dégoupiller)</div><div class="step-desc">Retirer la goupille de sécurité d'un coup sec. Vérifier le manomètre en zone verte.</div></div></div>
+        <div class="step"><div class="step-num">A</div><div class="step-body"><div class="step-title">Approcher</div><div class="step-desc">S'approcher à bonne distance : <span class="val">≥ 2 m</span> pour liquides, <span class="val">≥ 3 m</span> pour poudre. <strong>Vent dans le dos.</strong> Voie de repli assurée.</div></div></div>
+        <div class="step"><div class="step-num">S</div><div class="step-body"><div class="step-title">Serrer (actionner)</div><div class="step-desc">Appuyer sur la gâchette ou la poignée. Diriger le jet vers la base des flammes.</div></div></div>
+        <div class="step"><div class="step-num">S</div><div class="step-body"><div class="step-title">Swiper (balayer)</div><div class="step-desc">Balayer à la base des flammes de gauche à droite, en avançant progressivement. Ne jamais viser les flammes en hauteur.</div></div></div>
+      </div>
+      <div class="callout callout-orange" style="margin-top:12px">
+        <span class="callout-icon">⏱</span>
+        <div class="callout-body">Un extincteur de 6 kg poudre dure ≈ 12 à 15 secondes. Ne jamais l'utiliser seul face à un grand feu. Toujours avoir une voie de sortie assurée.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section anchor-target" id="secours-publics">
+  <div class="section-header">
+    <div class="section-icon">🚑</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 4 · Séquence 4.6 — 4h</div>
+      <h2 class="section-title">Appel et réception des services publics de secours</h2>
+      <div class="section-subtitle">Moyens d'alerte · Message de demande de secours · Accueil · Guidage · Hiérarchie</div>
+    </div>
+    <div class="duration-badge">⏱ 4h</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Message de demande de secours <span class="badge badge-key">Clé</span></div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Qui appelle</div><div class="step-desc">Nom, qualité, établissement, numéro de rappel.</div></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Où (adresse complète)</div><div class="step-desc">Adresse précise, accès, point de rendez-vous.</div></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Quoi (nature du problème)</div><div class="step-desc">Incendie, accident, victime, nature du sinistre.</div></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Combien de victimes</div><div class="step-desc">Nombre, état, localisation.</div></div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Mesures déjà prises</div><div class="step-desc">Évacuation engagée, alarme déclenchée, 1ère intervention, coupures effectuées.</div></div></div>
+        <div class="step"><div class="step-num">6</div><div class="step-body"><div class="step-title">Rester en ligne</div><div class="step-desc">Attendre les instructions de l'opérateur. Ne pas raccrocher en premier.</div></div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Accueil et guidage des secours</div>
+      <ul class="list">
+        <li>Se placer à l'entrée principale désignée avant l'arrivée des secours.</li>
+        <li>Remettre le plan de l'établissement et le registre de sécurité au commandant des opérations (COS).</li>
+        <li>Indiquer la localisation précise du sinistre et des victimes.</li>
+        <li>Se mettre à la disposition du COS : il prend le commandement des opérations.</li>
+        <li>Préparation de l'arrivée : dégager les accès, ouvrir les portails, signaler les obstacles.</li>
+        <li>Informer la hiérarchie (SSIAP 2, SSIAP 3, direction) sans délai.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section anchor-target" id="sensibilisation">
+  <div class="section-header">
+    <div class="section-icon">📢</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 4 · Séquence 4.7 — 1h30</div>
+      <h2 class="section-title">Sensibilisation des occupants</h2>
+      <div class="section-subtitle">Respect des consignes · Comportements à risque · Prévention</div>
+    </div>
+    <div class="duration-badge">⏱ 1h30</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Sensibilisation des occupants</div>
+      <ul class="list">
+        <li>Rappeler les consignes de sécurité aux occupants et visiteurs (comportements à tenir en cas d'alarme, localisation des sorties, point de rassemblement).</li>
+        <li>Prévenir les comportements à risque : usage de flammes nues, encombrement des dégagements, stockage sauvage, désactivation des systèmes de sécurité.</li>
+        <li>Sensibilisation adaptée aux occupants : langage clair, sans jargon technique, adapté au contexte (type d'établissement, public).</li>
+        <li>Signaler tout comportement à risque persistant au SSIAP 2 et le consigner.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ PARTIE 5 — CONCRÉTISATION DES ACQUIS -->
+<section class="section anchor-target" id="visites">
+  <div class="section-header">
+    <div class="section-icon">🏗️</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 5 · Séquence 5.1 — 10h</div>
+      <h2 class="section-title">Visites applicatives</h2>
+      <div class="section-subtitle">Découverte opérationnelle d'ERP et d'IGH</div>
+    </div>
+    <div class="duration-badge">⏱ 10h</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Objectifs des visites applicatives</div>
+      <ul class="list">
+        <li>Identification des installations de sécurité en situation réelle.</li>
+        <li>Actions à mener par l'agent lors des visites.</li>
+        <li>Fonctionnement du service de sécurité sur site.</li>
+        <li>Organisation d'un poste central de sécurité.</li>
+        <li>Parcours d'une ronde.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Exigences réglementaires <span class="badge badge-imp">Important</span></div>
+      <ul class="list">
+        <li>Visite réelle d'au moins <strong>2 ERP du 1er groupe</strong> d'activités différentes, dont au moins <strong>1 ERP de 1ère catégorie</strong> ou doté d'un SSI de catégorie A.</li>
+        <li>Visite d'un IGH : réelle si possible, virtuelle si une visite réelle est impossible.</li>
+        <li><span class="hl-red">La visite ERP est obligatoirement réelle.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section anchor-target" id="mises-en-situation">
+  <div class="section-header">
+    <div class="section-icon">🎭</div>
+    <div class="section-meta">
+      <div class="section-num">Partie 5 · Séquence 5.2 — 7h</div>
+      <h2 class="section-title">Mises en situation d'intervention</h2>
+      <div class="section-subtitle">Application globale des acquis</div>
+    </div>
+    <div class="duration-badge">⏱ 7h</div>
+  </div>
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Situations entraînées</div>
+      <ul class="list">
+        <li>Action face à des fumées ou un incendie.</li>
+        <li>Évacuation des occupants.</li>
+        <li>Prise en charge d'une victime.</li>
+        <li>Gestion des dangers imminents.</li>
+        <li>Réponse au non-respect des consignes de sécurité.</li>
+        <li>Levée de doute.</li>
+        <li>Utilisation des moyens de communication mobiles (radio, téléphone).</li>
+        <li>Transmission d'un compte-rendu exploitable.</li>
+        <li>Rédaction d'une main courante claire et précise.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">Compétences à maîtriser pour l'examen pratique <span class="badge badge-exam">Examen</span></div>
+      <ul class="list">
+        <li>Effectuer une ronde en repérant des anomalies.</li>
+        <li>Identifier et traiter un départ de sinistre.</li>
+        <li>Répondre aux questions du jury sur les procédures et réglementations.</li>
+        <li>Rédiger une main courante à partir des anomalies constatées pendant la ronde.</li>
+      </ul>
+      <div class="callout callout-blue" style="margin-top:10px">
+        <span class="callout-icon">ℹ️</span>
+        <div class="callout-body">L'épreuve pratique dure 15 minutes. Évaluation : Apte / Inapte. Il n'y a pas de note chiffrée pour cette épreuve.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================ PREMIERS SECOURS -->
+<section class="section anchor-target" id="premiers-secours">
+  <div class="section-header">
+    <div class="section-icon">🩺</div>
+    <div class="section-meta">
+      <div class="section-num">Secours à personnes</div>
+      <h2 class="section-title">Assistance aux personnes & Premiers secours</h2>
+      <div class="section-subtitle">Chaîne de survie · Bilan victime · PLS · RCP · DEA · Hémorragie · Brûlures · AVC</div>
+    </div>
+  </div>
+
+  <div class="cards cards-2">
+    <div class="card" style="border-color:var(--red)">
+      <div class="card-title">Chaîne de survie <span class="badge badge-key">Clé</span></div>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Alerte précoce</div><div class="step-desc">Appel 15 / 18 / 112. Donner : qui appelle, où, quoi, combien de victimes.</div></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">RCP précoce</div><div class="step-desc">Réanimation Cardio-Pulmonaire démarrée immédiatement. Chaque minute compte. <span class="hl-red">−10 % de chances de survie par minute sans RCP.</span></div></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Défibrillation précoce</div><div class="step-desc">Utilisation du DEA dès disponible. Multiplie les chances de survie par 3.</div></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Prise en charge médicale</div><div class="step-desc">Arrivée des secours professionnels (SAMU, pompiers).</div></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Bilan de la victime — méthode SCVHA <span class="badge badge-key">Clé</span></div>
+      <ul class="list">
+        <li><strong>S — Sécuriser</strong> — Zone sûre pour la victime ET pour le sauveteur. Ne pas devenir une victime supplémentaire.</li>
+        <li><strong>C — Conscience</strong> — Stimulation verbale ("vous m'entendez ?") et tactile (pression sur les épaules). Pas de réponse → inconscient.</li>
+        <li><strong>V — Ventilation (respiration)</strong> — Basculer la tête en arrière, soulever le menton (LVA). Observer, écouter, sentir ≤ 10 secondes.</li>
+        <li><strong>H — Hémorragie</strong> — Recherche d'hémorragie visible. Compression immédiate si trouvée.</li>
+        <li><strong>A — Alerter et transmettre</strong> — Bilan précis aux secours (état de conscience, ventilation, hémorragie, contexte).</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Victime inconsciente + respire → PLS <span class="badge badge-imp">Important</span></div>
+      <ul class="list">
+        <li>Position Latérale de Sécurité (PLS) : prévient l'inhalation de vomissements (asphyxie par fausse route).</li>
+        <li>Côté gauche de préférence (sauf suspicion fracture rachis).</li>
+        <li>Maintenir la tête légèrement en extension pour libérer les voies aériennes.</li>
+        <li>Surveiller la respiration en permanence jusqu'à l'arrivée des secours.</li>
+        <li>Ne jamais quitter une victime inconsciente.</li>
+        <li><span class="hl-red">PLS contre-indiquée en cas de suspicion de fracture du rachis</span> (sauf risque vital immédiat d'asphyxie).</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Victime inconsciente + ne respire pas → RCP <span class="badge badge-key">Clé</span></div>
+      <ul class="list">
+        <li>Déclencher immédiatement la RCP — envoyer chercher un DEA.</li>
+        <li><strong>30 compressions thoraciques</strong> : fréquence <span class="val">100–120/min</span>, profondeur <span class="val">5 à 6 cm</span>, talon de main sur centre du sternum, bras tendus, décompression complète.</li>
+        <li>Suivies de <strong>2 insufflations</strong> (ou compressions seules si formation insuffisante).</li>
+        <li>Ratio <span class="val">30/2</span> en continu jusqu'à l'arrivée des secours ou du DEA.</li>
+        <li><span class="hl-red">Gasps (mouvements irréguliers) = ne comptent PAS comme respiration. Démarrer la RCP.</span></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">DEA — Défibrillateur Automatisé Externe <span class="badge badge-key">Clé</span></div>
+      <ul class="list">
+        <li>Guidé vocalement pas à pas — <strong>utilisable par toute personne</strong> même sans formation (décret n°2018-1186).</li>
+        <li>Mettre en marche dès l'arrivée sans interrompre la RCP (si deuxième personne disponible).</li>
+        <li>Coller les électrodes sur la peau nue et sèche. Placement : une électrode sous l'épaule droite, une en bas à gauche.</li>
+        <li><span class="hl-red">NE PAS toucher la victime pendant l'analyse et pendant le choc électrique.</span></li>
+        <li>Reprendre immédiatement la RCP (30/2) après le choc sans attendre (2 minutes, puis ré-analyse).</li>
+        <li>Connaître l'emplacement de tous les DEA de l'établissement.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Obstruction des voies aériennes (fausse route)</div>
+      <ul class="list">
+        <li><strong>Obstruction partielle</strong> (la personne tousse encore) — Encourager à tousser, surveiller. Si aggravation → obstruction totale.</li>
+        <li><strong>Obstruction totale adulte / enfant > 1 an</strong> (ne peut plus parler, ni tousser, cyanose) :</li>
+      </ul>
+      <div class="steps" style="margin-top:8px">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">5 claques vigoureuses dans le dos</div><div class="step-desc">Entre les omoplates, talon de main.</div></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">5 compressions abdominales (Heimlich)</div><div class="step-desc">Poings croisés sous le sternum, geste vers le haut et vers soi.</div></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Alterner jusqu'à désobstruction</div><div class="step-desc">Si inconscience → RCP immédiate + appel 15/18.</div></div></div>
+      </div>
+      <ul class="list" style="margin-top:8px">
+        <li><strong>Nourrisson (&lt; 1 an)</strong> — 5 claques dos + 5 compressions thoraciques (jamais Heimlich).</li>
+        <li><strong>Femme enceinte / obèse</strong> — 5 claques dos + 5 compressions thoraciques (pas abdominales).</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Hémorragies <span class="badge badge-imp">Important</span></div>
+      <ul class="list">
+        <li><strong>Compression directe immédiate</strong> avec tissu propre ou compresses — maintenir fermement sans relâcher.</li>
+        <li>Si corps étranger dans la plaie : ne pas retirer, comprimer autour.</li>
+        <li><strong>Garrot</strong> — Uniquement si hémorragie massive impossible à comprimer (amputation, plaie béante) :
+          <br>— Poser à <span class="val">5 à 7 cm au-dessus</span> de la plaie.
+          <br>— Serrer jusqu'à arrêt du saignement.
+          <br>— <span class="hl-red">Marquer l'heure de pose</span> sur le garrot (ex : "T 14h35").
+          <br>— <span class="hl-red">Ne jamais desserrer un garrot une fois posé.</span>
+        </li>
+        <li><strong>Hémorragie interne (choc traumatique)</strong> : allonger, surélever les jambes si possible, couvrir, appeler le 15 immédiatement.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Brûlures <span class="badge badge-key">Clé</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Type</th><th>Conduite à tenir</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Thermique</strong></td><td>Refroidir à l'eau tempérée (<span class="val">15–25°C</span>) pendant <span class="val">10 à 15 min</span>. Ne pas utiliser de glace.</td></tr>
+            <tr><td><strong>Chimique</strong></td><td>Rincer abondamment à l'eau claire pendant <span class="val">20 min minimum</span>. Enlever vêtements contaminés.</td></tr>
+            <tr><td><strong>Électrique</strong></td><td>Couper l'électricité, NE PAS toucher. Traiter comme brûlure thermique. Toujours appeler le 15.</td></tr>
+            <tr><td><strong>Inhalation fumées</strong></td><td>Urgence absolue → 15/18 immédiatement. Oxygène si disponible.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="list" style="margin-top:10px">
+        <li>Ne pas percer les cloques (risque infectieux).</li>
+        <li>Ne pas appliquer corps gras, crème, dentifrice, farine, alcool.</li>
+        <li>Brûlure étendue (<span class="val">&gt; 10 %</span> de la surface corporelle) ou profonde → 15/18 immédiatement.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">AVC — Méthode FAST (VITE) <span class="badge badge-imp">Important</span></div>
+      <ul class="list">
+        <li><strong>V — Visage</strong> — Asymétrie faciale (sourire dévié, commissure tombante).</li>
+        <li><strong>I — Incapacité</strong> — Un bras ne se lève pas ou tombe.</li>
+        <li><strong>T — Trouble de la parole</strong> — Mots incompréhensibles, ne peut plus parler.</li>
+        <li><strong>E — Éveil</strong> — Appeler le 15 de toute urgence.</li>
+        <li>Noter l'heure exacte de début des symptômes (crucial pour le traitement thrombolytique).</li>
+        <li>Ne jamais donner à manger ni à boire (risque de fausse route).</li>
+        <li>Ne pas faire marcher. Position de confort. Appeler le 15.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Malaise, infarctus, traumatismes</div>
+      <ul class="list">
+        <li><strong>Malaise général</strong> — Allonger ou asseoir (position de confort), surveiller, desserrer les vêtements, appeler 15 si aggravation.</li>
+        <li><strong>Douleur thoracique (suspicion infarctus)</strong> — Asseoir en position demi-assise. Ne pas faire marcher. Appeler le 15 immédiatement.</li>
+        <li><strong>Fracture</strong> — Ne pas mobiliser sauf danger immédiat. Immobiliser dans la position où elle se trouve.</li>
+        <li><strong>Suspicion fracture rachis cervical</strong> — Maintien axe tête-cou-tronc, ne pas tourner ni fléchir.</li>
+        <li><strong>Convulsions</strong> — Ne pas bloquer. Protéger la tête. Chronométrer. Après la crise : contrôle respiration + PLS si inconscient.</li>
+        <li><strong>Électrisation</strong> — Couper le courant avant tout contact. Risque de troubles du rythme cardiaques. Appel 15 systématique.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Inhalation de fumées / intoxication CO</div>
+      <ul class="list">
+        <li>Sortir la victime de l'atmosphère viciée si possible et <span class="hl-red">sans danger pour soi</span>.</li>
+        <li>Ne jamais pénétrer dans un local enfumé sans Appareil Respiratoire Isolant (ARI).</li>
+        <li>Allonger, desserrer les vêtements, apporter de l'oxygène si disponible.</li>
+        <li><strong>Intoxication au CO</strong> — Symptômes : maux de tête, nausées, vertiges en groupe dans le même local = CO jusqu'à preuve du contraire. Aérer, sortir, appeler 18 et 15.</li>
+        <li>CO : inodore, incolore, non irritant. Mortel à 1 % en quelques minutes.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Numéros d'urgence <span class="badge badge-memo">Mémo</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Numéro</th><th>Service</th><th>Usage</th></tr></thead>
+          <tbody>
+            <tr><td><strong style="color:var(--red)">15</strong></td><td>SAMU — Centre 15</td><td>Urgences médicales, conseils médecin, arrêt cardiaque</td></tr>
+            <tr><td><strong style="color:var(--blue)">17</strong></td><td>Police / Gendarmerie</td><td>Ordre public, intrusion, violence, malveillance</td></tr>
+            <tr><td><strong style="color:var(--accent)">18</strong></td><td>Sapeurs-Pompiers</td><td>Incendie, accident, noyade, secours à personne</td></tr>
+            <tr><td><strong style="color:var(--green)">112</strong></td><td>Numéro européen</td><td>Tous services d'urgence depuis tout réseau</td></tr>
+            <tr><td><strong>114</strong></td><td>Urgences sourds/muets</td><td>Par SMS ou vidéo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Récapitulatif des conduites à tenir <span class="badge badge-exam">Examen</span></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Situation</th><th>Conduite à tenir</th></tr></thead>
+          <tbody>
+            <tr><td>Victime consciente, respire</td><td>Évaluer bilan, appeler 15, surveiller</td></tr>
+            <tr><td>Victime inconsciente, <strong>respire</strong></td><td><span class="hl-green">PLS</span>, appeler 15/18, surveiller</td></tr>
+            <tr><td>Victime inconsciente, <strong>ne respire pas</strong></td><td><span class="hl-red">RCP immédiate (30/2)</span>, DEA dès disponible, appeler 18/15</td></tr>
+            <tr><td>Hémorragie abondante</td><td>Compression directe, garrot si amputation/impossible</td></tr>
+            <tr><td>Brûlure thermique</td><td>Eau 15-25°C pendant 10-15 min</td></tr>
+            <tr><td>Obstruction totale voies aériennes</td><td>5 claques dos + 5 compressions abdominales (Heimlich)</td></tr>
+            <tr><td>Douleur thoracique</td><td>Position demi-assise, appeler 15, surveiller</td></tr>
+            <tr><td>AVC (méthode VITE)</td><td>Ne pas faire marcher, position confort, appeler 15, noter heure</td></tr>
+            <tr><td>Inhalation fumées/CO</td><td>Sortir si possible, PLS ou RCP, appeler 18/15</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ RISQUES SPÉCIFIQUES -->
+<section class="section anchor-target" id="risques">
+  <div class="section-header">
+    <div class="section-icon">⚠️</div>
+    <div class="section-meta">
+      <div class="section-num">Risques spécifiques</div>
+      <h2 class="section-title">ATEX, gaz, électricité & risques particuliers</h2>
+      <div class="section-subtitle">Zones ATEX · Détection gaz · Locaux techniques · Batteries lithium · Malveillance</div>
+    </div>
+  </div>
+
+  <div class="cards cards-2">
+    <div class="card">
+      <div class="card-title">Zones ATEX (Atmosphères Explosibles) <span class="badge badge-imp">Important</span></div>
+      <ul class="list">
+        <li>Mélange air/gaz inflammable ou poussières combustibles en quantité suffisante pour exploser.</li>
+        <li><strong>ATEX gaz</strong> : hydrocarbures, solvants, gaz combustibles (LIE/LSE).</li>
+        <li><strong>ATEX poussières</strong> : farines, sucre, bois, métaux en poudre.</li>
+        <li><strong>Zone 0/20</strong> — ATEX présente en permanence.</li>
+        <li><strong>Zone 1/21</strong> — ATEX présente occasionnellement.</li>
+        <li><strong>Zone 2/22</strong> — ATEX présente exceptionnellement.</li>
+        <li>L'agent SSIAP ne pénètre PAS en zone ATEX sans habilitation et matériel antidéflagrant.</li>
+      </ul>
+      <div class="callout callout-red" style="margin-top:10px">
+        <span class="callout-icon">🚨</span>
+        <div class="callout-body"><div class="callout-title">Consigne en zone ATEX</div>Alarme ATEX → NE PAS ACTIONNER l'électricité. Pas de flamme, pas d'étincelle. Ventiler. Alerter responsable et pompiers. Évacuer le périmètre.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Détection gaz — Conduite à tenir <span class="badge badge-imp">Important</span></div>
+      <p style="font-size:.83rem;color:var(--text-2);margin-bottom:10px">Odeur de gaz ou alarme détecteur gaz — Procédure immédiate :</p>
+      <div class="steps">
+        <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Ne pas actionner l'électricité</div><div class="step-desc">Pas d'interrupteurs, pas de prises (risque d'étincelles). Ne pas fumer.</div></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Ventiler le local</div><div class="step-desc">Ouvrir portes et fenêtres.</div></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Fermer la vanne gaz</div><div class="step-desc">Si accessible et identifiée.</div></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Évacuer et alerter</div><div class="step-desc">Évacuer les personnes. Appeler le fournisseur de gaz et le 18/112. Consigner.</div></div></div>
+      </div>
+      <div class="callout callout-blue" style="margin-top:10px">
+        <span class="callout-icon">ℹ️</span>
+        <div class="callout-body">Gaz naturel (méthane) : plus léger que l'air → s'accumule en haut. Propane/butane : plus lourd → s'accumule en bas (danger en sous-sol).</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Locaux techniques à risque</div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Local</th><th>Risques principaux</th><th>Vérifications SSIAP 1</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Chaufferie</strong></td><td>Gaz, fuite gaz, CO, surpression chaudière</td><td>Odeur, alarme CO, vanne gaz, absence accumulation</td></tr>
+            <tr><td><strong>TGBT / Locaux élec.</strong></td><td>Arc électrique, surchauffe, incendie câbles</td><td>Bruit anormal, odeur brûlé, échauffement</td></tr>
+            <tr><td><strong>Local vide-ordures</strong></td><td>Départ de feu par fermentation ou cigarette</td><td>Odeur, chaleur, déchets dépassant la goulotte</td></tr>
+            <tr><td><strong>Local groupe électrogène</strong></td><td>Carburant (diesel), CO des gaz d'échappement</td><td>Niveau carburant, absence de fuite, ventilation</td></tr>
+            <tr><td><strong>Parking sous-sol</strong></td><td>CO, feu véhicule, GPL accidentel</td><td>Détecteur CO actif, sprinklers, sorties dégagées</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Batteries lithium & véhicules électriques <span class="badge badge-imp">Important</span></div>
+      <ul class="list">
+        <li>Les batteries lithium peuvent entrer en emballement thermique : échauffement brutal, fumées épaisses, projections, reprises de feu possibles.</li>
+        <li><strong>Signes d'alerte</strong> : odeur chimique inhabituelle, crépitements, gonflement, dégagement de fumée blanche ou grise, chaleur anormale du chargeur.</li>
+        <li>Éviter le stockage sauvage et la recharge non surveillée dans les dégagements, halls, sous escaliers.</li>
+        <li>En cas de sinistre débutant : alerter immédiatement, isoler la zone, évacuer les personnes exposées, attendre les secours si le risque dépasse le feu naissant.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Atmosphères enrichies en oxygène</div>
+      <ul class="list">
+        <li>L'oxygène n'est pas combustible mais active fortement la combustion.</li>
+        <li>Présence possible en établissements de santé, stockages de bouteilles, zones de soins.</li>
+        <li>Consignes : pas de graisse ni d'huile sur les raccords, pas de flamme nue, bouteilles arrimées, locaux ventilés.</li>
+        <li>En cas de fuite ou sinistre : éloigner les sources d'ignition, prévenir le personnel compétent, renseigner précisément les secours.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Risques de malveillance incendie <span class="badge badge-imp">Important</span></div>
+      <ul class="list">
+        <li><strong>Incendie volontaire (arson)</strong> — Signes : départ de feu atypique, multiple, présence de produits accélérateurs (odeur d'essence).</li>
+        <li>En cas de suspicion : alerter pompiers et police, préserver les indices.</li>
+        <li><strong>Alerte à la bombe</strong> — Ne pas toucher les objets suspects. Évacuer la zone. Alerter le 17 et SSIAP 2. <span class="hl-red">Ne pas utiliser les radios ni téléphones portables près de l'objet suspect.</span></li>
+        <li>Signaler tout colis ou objet abandonné sans propriétaire identifiable.</li>
+        <li>Signaler toute personne rôdant autour des locaux techniques ou issues de secours.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-title">Plan de continuité — Panne SSI</div>
+      <ul class="list">
+        <li>Tout dérangement ou panne SSI doit être signalé immédiatement au SSIAP 2.</li>
+        <li>Mesures compensatoires à mettre en place : rondes renforcées dans les zones privées de détection, signalisation supplémentaire, appel du prestataire maintenance.</li>
+        <li>La panne d'un système de sécurité impose une vigilance humaine accrue, pas réduite.</li>
+        <li>Consigner dans la main courante : heure de détection, nature, mesures compensatoires.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ VALEURS RÉGLEMENTAIRES -->
+<section class="section anchor-target" id="valeurs">
+  <div class="section-header">
+    <div class="section-icon">📏</div>
+    <div class="section-meta">
+      <div class="section-num">Révision finale</div>
+      <h2 class="section-title">Valeurs réglementaires à connaître par cœur</h2>
+      <div class="section-subtitle">Toutes les valeurs numériques essentielles du programme SSIAP 1</div>
+    </div>
+  </div>
+
+  <div class="cards cards-3">
+    <div class="card">
+      <div class="card-title" style="color:var(--accent)">Formation & recyclage</div>
+      <ul class="list">
+        <li>Formation initiale SSIAP 1 : <span class="val">67h minimum</span></li>
+        <li>MAC SSIAP 1 : <span class="val">35h</span> tous les <span class="val">3 ans</span></li>
+        <li>Formation SSIAP 2 : <span class="val">70h</span></li>
+        <li>Formation SSIAP 3 : <span class="val">200h</span></li>
+        <li>Recyclage SST : tous les <span class="val">2 ans</span></li>
+        <li>Conservation registre de sécurité : <span class="val">≥ 5 ans</span></li>
+        <li>Stagiaires max par session : <span class="val">12</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--blue)">ERP & IGH</div>
+      <ul class="list">
+        <li>ERP 1ère catégorie : <span class="val">&gt; 1 500 personnes</span></li>
+        <li>IGH habitation : <span class="val">&gt; 50 m</span></li>
+        <li>IGH autres usages : <span class="val">&gt; 28 m</span></li>
+        <li>ITGH : <span class="val">&gt; 200 m</span></li>
+        <li>Exercice évacuation ERP : <span class="val">1/an minimum</span></li>
+        <li>Exercice évacuation IGH : <span class="val">2/an dont 1 nocturne</span></li>
+        <li>Exercice écoles (type R) : <span class="val">1er mois puis 2/an</span></li>
+        <li>Visite commission cat. 1 : <span class="val">tous les 3 ans</span></li>
+        <li>Visite commission cat. 2/3/4 : <span class="val">tous les 5 ans</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--green)">Dégagements & UP</div>
+      <ul class="list">
+        <li>1 UP = <span class="val">0,60 m</span></li>
+        <li>Porte 1 UP = <span class="val">0,90 m minimum</span></li>
+        <li>Balisage lumineux : <span class="val">≤ 1,80 m du sol</span></li>
+        <li>Hauteur libre dégagements : <span class="val">≥ 2,00 m</span></li>
+        <li>Distance sécurité point de rassemblement : <span class="val">≥ 30 m</span></li>
+        <li>Surface exutoire désenfumage : <span class="val">1/100</span> surface plancher</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--teal)">SSI & équipements</div>
+      <ul class="list">
+        <li>Autonomie AES (veille) : <span class="val">≥ 12h</span></li>
+        <li>Autonomie AES (alarme) : <span class="val">≥ 30 min</span></li>
+        <li>Autonomie BAES : <span class="val">≥ 1 heure</span></li>
+        <li>Délai levée de doute : <span class="val">3 minutes max</span></li>
+        <li>DM (déclencheurs manuels) : <span class="val">tous les 30 m</span></li>
+        <li>Révision extincteur : <span class="val">annuelle + 5 ans complète</span></li>
+        <li>Teneur O₂ minimale combustion : <span class="val">15 %</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--red)">Secours à personnes</div>
+      <ul class="list">
+        <li>RCP adulte : <span class="val">30/2</span>, <span class="val">100–120/min</span>, <span class="val">5–6 cm</span></li>
+        <li>Lésions cérébrales irréversibles : <span class="val">3 min</span> sans RCP</li>
+        <li>Survie −10 % par minute sans défibrillation</li>
+        <li>Brûlure thermique : eau <span class="val">15–25°C / 10–15 min</span></li>
+        <li>Brûlure chimique : rinçage <span class="val">20 min minimum</span></li>
+        <li>Garrot : <span class="val">5–7 cm au-dessus</span> de la plaie</li>
+        <li>Brûlure étendue : appel 15/18 si <span class="val">&gt; 10 %</span> surface corporelle</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--yellow)">Responsabilités juridiques</div>
+      <ul class="list">
+        <li>NAPD (art. 223-6 CP) : <span class="val">5 ans + 75 000 €</span></li>
+        <li>Mise en danger délibérée (art. 223-1 CP) : <span class="val">1 an + 15 000 €</span></li>
+        <li>Blessures involontaires aggravées : <span class="val">3 ans + 45 000 €</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--purple)">Colonnes & RIA</div>
+      <ul class="list">
+        <li>RIA DN 19 : débit <span class="val">26 L/min</span></li>
+        <li>RIA DN 25 : débit <span class="val">52 L/min</span></li>
+        <li>RIA DN 33 : débit <span class="val">82 L/min</span></li>
+        <li>PI (poteau incendie) DN 100 : pression <span class="val">≥ 1 bar</span>, débit <span class="val">≥ 60 m³/h</span></li>
+        <li>Distance max entre 2 PI : <span class="val">200 m</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--accent-2)">Travaux & prévention</div>
+      <ul class="list">
+        <li>Permis de feu — surveillance : <span class="val">1h après fin travaux</span></li>
+        <li>Combustibles zone travaux : retrait sur <span class="val">5 m</span></li>
+        <li>Gaz naturel LIE : <span class="val">5 %</span> · LSE : <span class="val">15 %</span></li>
+        <li>Flashover : <span class="val">500–600°C</span> au niveau du plafond</li>
+        <li>Point d'éclair essence : <span class="val">−40°C</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================================ CONFUSIONS FRÉQUENTES -->
+<section class="section anchor-target" id="confusions">
+  <div class="section-header">
+    <div class="section-icon">🔀</div>
+    <div class="section-meta">
+      <div class="section-num">Révision finale</div>
+      <h2 class="section-title">Confusions fréquentes à l'examen</h2>
+      <div class="section-subtitle">Points souvent mal compris ou mélangés dans les QCM</div>
+    </div>
+  </div>
+
+  <div class="confuse-grid" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr))">
+    <div class="confuse-item">
+      <div class="confuse-vs">
+        <span class="confuse-a">Réaction au feu</span>
+        <span class="confuse-sep">≠</span>
+        <span class="confuse-b">Résistance au feu</span>
+      </div>
+      <div class="confuse-desc"><strong>Réaction</strong> = comportement du matériau face aux flammes (Euroclasses A1–F). <strong>Résistance</strong> = tenue de la structure dans le temps (REI 60, CF 1h).</div>
+    </div>
+    <div class="confuse-item">
+      <div class="confuse-vs">
+        <span class="confuse-a">Catégorie ERP</span>
+        <span class="confuse-sep">≠</span>
+        <span class="confuse-b">Type ERP</span>
+      </div>
+      <div class="confuse-desc"><strong>Catégorie</strong> = effectif (1ère à 5ème). <strong>Type</strong> = activité exercée (L, M, N, O, R, U…).</div>
+    </div>
+    <div class="confuse-item">
+      <div class="confuse-vs">
+        <span class="confuse-a">Colonne sèche</span>
+        <span class="confuse-sep">≠</span>
+        <span class="confuse-b">Colonne humide</span>
+      </div>
+      <div class="confuse-desc">La sèche est vide et alimentée par les pompiers depuis la rue. La humide est sous pression permanente et utilisable immédiatement.</div>
+    </div>
+    <div class="confuse-item">
+      <div class="confuse-vs">
+        <span class="confuse-a">Flash-over</span>
+        <span class="confuse-sep">≠</span>
+        <span class="confuse-b">Back-draft</span>
+      </div>
+      <div class="confuse-desc"><strong>Flash-over</strong> : embrasement généralisé soudain du local entier (500–600°C). <strong>Back-draft</strong> : explosion à l'ouverture d'une porte sur un feu manquant d'air.</div>
+    </div>
+    <div class="confuse-item">
+      <div class="confuse-vs">
+        <span class="confuse-a">PLS</span>
+        <span class="confuse-sep">≠</span>
+        <span class="confuse-b">RCP</span>
+      </div>
+      <div class="confuse-desc"><strong>PLS</strong> : victime inconsciente <em>qui respire</em>. <strong>RCP</strong> : victime inconsciente <em>qui NE RESPIRE PAS</em> (ou gasps).</div>
+    </div>
+    <div class="confuse-item">
+      <div class="confuse-vs">
+        <span class="confuse-a">IGH habitation</span>
+        <span class="confuse-sep">≠</span>
+        <span class="confuse-b">IGH bureaux</span>
+      </div>
+      <div class="confuse-desc">Habitation : <strong>&gt; 50 m</strong>. Bureaux, hôtels, santé, autres usages : <strong>&gt; 28 m</strong>.</div>
+    </div>
+    <div class="confuse-item">
+      <div class="confuse-vs">
+        <span class="confuse-a">Poudre ABC</span>
+        <span class="confuse-sep">≠</span>
+        <span class="confuse-b">Poudre BC</span>
+      </div>
+      <div class="confuse-desc">ABC convient aux feux A, B et C. BC ne convient PAS aux feux de solides (A).</div>
+    </div>
+    <div class="confuse-item">
+      <div class="confuse-vs">
+        <span class="confuse-a">Alarme générale</span>
+        <span class="confuse-sep">≠</span>
+        <span class="confuse-b">Décision d'évacuation</span>
+      </div>
+      <div class="confuse-desc">L'alarme signale, mais l'évacuation est décidée par le responsable (sauf cas d'urgence absolue ou procédure automatique).</div>
+    </div>
+    <div class="confuse-item">
+      <div class="confuse-vs">
+        <span class="confuse-a">CO₂ sur feu A</span>
+        <span class="confuse-sep">⚠️</span>
+        <span class="confuse-b">Attention !</span>
+      </div>
+      <div class="confuse-desc">CO₂ efficace sur feux B et électricité. <strong>NE PAS</strong> utiliser sur feux A étendus (pas de refroidissement), ni en espace confiné (asphyxie). Tenir par la poignée isolée (sortie à −78°C).</div>
+    </div>
+    <div class="confuse-item">
+      <div class="confuse-vs">
+        <span class="confuse-a">EAS</span>
+        <span class="confuse-sep">≠</span>
+        <span class="confuse-b">Zone d'évacuation</span>
+      </div>
+      <div class="confuse-desc">L'EAS est une zone d'ATTENTE sécurisée pour PMR. Ce sont les pompiers qui assurent l'évacuation définitive.</div>
+    </div>
+    <div class="confuse-item">
+      <div class="confuse-vs">
+        <span class="confuse-a">Feu de gaz (Cl. C)</span>
+        <span class="confuse-sep">⚠️</span>
+        <span class="confuse-b">Couper le gaz d'abord</span>
+      </div>
+      <div class="confuse-desc">Ne jamais éteindre une flamme de gaz sans couper le gaz d'abord. Risque d'explosion du gaz non brûlé qui s'accumule.</div>
+    </div>
+    <div class="confuse-item">
+      <div class="confuse-vs">
+        <span class="confuse-a">Acquittement alarme</span>
+        <span class="confuse-sep">≠</span>
+        <span class="confuse-b">Réarmement SSI</span>
+      </div>
+      <div class="confuse-desc">Acquitter l'alarme ne signifie pas que l'incendie est éteint. Le réarmement du SSI ne peut se faire qu'avec l'accord du SSIAP 2 et après vérification.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ================================================================ QUIZ -->
+<section class="section anchor-target" id="quiz-section">
+  <div class="section-header">
+    <div class="section-icon">🎯</div>
+    <div class="section-meta">
+      <div class="section-num">Quiz final</div>
+      <h2 class="section-title">Quiz SSIAP 1 — 30 questions</h2>
+      <div class="section-subtitle">Tous modules · 31 questions · Résultats immédiats · Explications détaillées</div>
+    </div>
+  </div>
+
+  <div class="quiz-container">
+    <div class="quiz-progress-bar">
+      <div class="quiz-progress-fill" id="qprogress" style="width:0%"></div>
+    </div>
+    <div class="quiz-header">
+      <span id="q-counter">Question 1 / 30</span>
+      <span id="q-score-display">Score : 0 / 0</span>
+    </div>
+
+    <!-- Question card -->
+    <div class="q-card" id="q-card">
+      <div class="q-number" id="q-number">QUESTION 01</div>
+      <div class="q-text" id="q-text"></div>
+      <div class="q-options" id="q-options"></div>
+      <div class="q-expl" id="q-expl"></div>
+      <button class="quiz-btn" id="q-next-btn" onclick="nextQuestion()">Question suivante →</button>
+    </div>
+
+    <!-- Score final -->
+    <div class="quiz-score" id="quiz-score">
+      <div class="score-circle" id="score-circle">
+        <div class="score-circle-inner">
+          <div class="score-num" id="final-score-num">0</div>
+          <div class="score-denom">/ 30</div>
+        </div>
+      </div>
+      <div class="score-label" id="score-label">Résultat</div>
+      <div class="score-msg" id="score-msg"></div>
+      <button class="quiz-restart" onclick="restartQuiz()">↺ Recommencer le quiz</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="footer-ref">
+    Base réglementaire : <a href="https://www.legifrance.gouv.fr" target="_blank">Légifrance</a> — Arrêté du 2 mai 2005 modifié, consolidation au 17 mars 2026
+  </div>
+  <div style="font-size:.72rem;color:var(--text-3)">SSIAP 1 · Document de révision pédagogique · Programme officiel intégral</div>
+</footer>
+
+</main><!-- /main -->
+
+<script>
+// ================================================================
+// NAVIGATION — Progress bar, sidebar active, back-to-top
+// ================================================================
+
+const progressFill = document.getElementById('progress-fill');
+const backTop      = document.getElementById('back-top');
+
+window.addEventListener('scroll', () => {
+  const scrolled = window.scrollY;
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  progressFill.style.width = maxScroll > 0 ? (scrolled / maxScroll * 100) + '%' : '0%';
+  backTop.classList.toggle('show', scrolled > 400);
+  updateActiveNav();
+});
+
+function updateActiveNav() {
+  const sections = document.querySelectorAll('.anchor-target');
+  const links    = document.querySelectorAll('.nav-link');
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 80) current = s.id;
+  });
+  links.forEach(l => {
+    l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+  });
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+// Close sidebar on link click (mobile)
+document.querySelectorAll('.nav-link').forEach(l => {
+  l.addEventListener('click', () => {
+    if (window.innerWidth < 900)
+      document.getElementById('sidebar').classList.remove('open');
+  });
+});
+
+// ================================================================
+// SEARCH
+// ================================================================
+document.getElementById('search-input').addEventListener('input', function() {
+  const q = this.value.trim().toLowerCase();
+  document.querySelectorAll('.nav-link').forEach(l => {
+    const txt = l.textContent.toLowerCase();
+    l.style.display = (!q || txt.includes(q)) ? '' : 'none';
+  });
+  document.querySelectorAll('.nav-section').forEach(sec => {
+    const visLinks = [...sec.querySelectorAll('.nav-link')].some(l => l.style.display !== 'none');
+    sec.style.display = visLinks ? '' : 'none';
+  });
+});
+
+// ================================================================
+// QUIZ
+// ================================================================
+const QUESTIONS = [
+  {
+    q: "L'arrêté du 2 mai 2005 modifié concerne principalement :",
+    opts: [
+      "Le règlement de sécurité des ERP uniquement",
+      "Les missions, l'emploi et la qualification du personnel SSIAP",
+      "La réglementation des IGH",
+      "Les normes des extincteurs portatifs"
+    ],
+    ans: 1,
+    expl: "L'arrêté du 2 mai 2005 modifié définit les missions, l'emploi et la qualification du personnel permanent des services de sécurité incendie des ERP et IGH (SSIAP 1, 2 et 3)."
+  },
+  {
+    q: "Quelle est la durée minimale de la formation SSIAP 1 (hors examen) ?",
+    opts: ["35 heures", "67 heures", "105 heures", "200 heures"],
+    ans: 1,
+    expl: "Le programme officiel fixe un volume minimal de 67 heures hors examen et hors déplacements, réparti en 5 parties."
+  },
+  {
+    q: "Le triangle du feu nécessite la réunion simultanée de :",
+    opts: [
+      "Combustible, eau et chaleur",
+      "Combustible, comburant et énergie d'activation",
+      "Oxygène, température et flamme",
+      "Matière organique, air et point d'éclair"
+    ],
+    ans: 1,
+    expl: "Le triangle du feu repose sur 3 éléments : un combustible (ce qui brûle), un comburant (l'oxygène de l'air) et une énergie d'activation (chaleur, étincelle, flamme)."
+  },
+  {
+    q: "Un feu de friteuse (huile bouillante) correspond à la classe :",
+    opts: ["Classe A", "Classe B", "Classe D", "Classe F"],
+    ans: 3,
+    expl: "Les feux d'huiles et de graisses de cuisson constituent la classe F. JAMAIS d'eau sur un feu de classe F : risque d'explosion de vapeur mortelle."
+  },
+  {
+    q: "La méthode PASS pour utiliser un extincteur signifie :",
+    opts: [
+      "Préparer, Allumer, Serrer, Surveiller",
+      "Prévenir, Approcher, Signaler, Stopper",
+      "Piocher (dégoupiller), Approcher, Serrer (actionner), Swiper (balayer)",
+      "Pointer, Actionner, Sécuriser, Stocker"
+    ],
+    ans: 2,
+    expl: "PASS = Piocher (retirer la goupille), Approcher (bonne distance, vent dans le dos), Serrer (actionner la gâchette), Swiper (balayer à la base des flammes)."
+  },
+  {
+    q: "L'extincteur CO₂ est efficace sur :",
+    opts: [
+      "Les feux de classe A (solides) uniquement",
+      "Les feux de classe B (liquides) et les équipements électriques sous tension",
+      "Les feux de classe D (métaux) uniquement",
+      "Les feux de classe F (huiles de cuisson)"
+    ],
+    ans: 1,
+    expl: "Le CO₂ est efficace sur les feux de classe B (liquides) et sur les feux électriques (ne conduit pas l'électricité). Il n'est pas adapté aux feux A étendus (pas de refroidissement) ni aux espaces confinés (risque d'asphyxie)."
+  },
+  {
+    q: "Un SSI de catégorie A comprend obligatoirement :",
+    opts: [
+      "Uniquement un tableau de signalisation et des diffuseurs sonores",
+      "Un SDI complet et un SMSI complet (CMSI + tous les DAS)",
+      "Uniquement des détecteurs automatiques sans SMSI",
+      "Un simple avertisseur autonome (DAAF)"
+    ],
+    ans: 1,
+    expl: "Un SSI de catégorie A est le plus complet : il comprend un SDI (Système de Détection Incendie) complet et un SMSI (Système de Mise en Sécurité Incendie) complet avec CMSI et tous les DAS. Obligatoire dans les IGH et les grands ERP."
+  },
+  {
+    q: "L'autonomie minimale de l'alimentation de sécurité (AES) d'un SSI en veille est de :",
+    opts: ["4 heures", "8 heures", "12 heures", "24 heures"],
+    ans: 2,
+    expl: "L'AES doit garantir une autonomie d'au moins 12 heures en veille et 30 minutes en alarme, afin de maintenir le SSI opérationnel en cas de coupure d'électricité."
+  },
+  {
+    q: "Quelle est la définition d'un IGH pour les usages autres qu'habitation (bureaux, hôtels) ?",
+    opts: [
+      "Plancher du dernier niveau accessible situé à plus de 28 m",
+      "Plancher du dernier niveau accessible situé à plus de 50 m",
+      "Tout bâtiment de plus de 10 étages",
+      "Tout bâtiment dont la hauteur totale dépasse 28 m"
+    ],
+    ans: 0,
+    expl: "Un IGH pour les usages autres qu'habitation est défini par un plancher du dernier niveau accessible situé à plus de 28 m. Pour l'habitation, le seuil est de 50 m."
+  },
+  {
+    q: "Un ERP de type O est un établissement :",
+    opts: [
+      "Bureau administratif",
+      "Hôtel ou pension de famille",
+      "Magasin de grande surface",
+      "Salle de spectacles"
+    ],
+    ans: 1,
+    expl: "Le type O désigne les hôtels, pensions de famille et résidences de tourisme. Le public y dort, ce qui impose des procédures spécifiques : alarme suffisamment forte pour réveiller, vérification des chambres, pas d'ascenseur pour l'évacuation."
+  },
+  {
+    q: "Combien d'exercices d'évacuation au minimum par an dans un IGH ?",
+    opts: [
+      "1, à n'importe quelle heure",
+      "2 dont au moins 1 nocturne obligatoire",
+      "3 dont 1 nocturne",
+      "4 par an"
+    ],
+    ans: 1,
+    expl: "Dans un IGH, la réglementation impose au moins 2 exercices d'évacuation par an, dont obligatoirement 1 exercice nocturne. Les ERP standards ont 1 exercice par an minimum."
+  },
+  {
+    q: "L'Espace d'Attente Sécurisé (EAS) est destiné à :",
+    opts: [
+      "Stocker le matériel d'intervention des pompiers",
+      "Accueillir temporairement les personnes à mobilité réduite lors d'une évacuation",
+      "Héberger les agents SSIAP pendant les exercices",
+      "Servir de local de repli pour les agents de sécurité"
+    ],
+    ans: 1,
+    expl: "L'EAS est une zone protégée CF 1h minimum, avec interphonie, destinée à accueillir temporairement les PMR lors d'une évacuation. Ce sont les pompiers qui assurent leur évacuation définitive depuis l'EAS."
+  },
+  {
+    q: "1 Unité de Passage (UP) correspond à une largeur de :",
+    opts: ["0,50 m", "0,60 m", "0,80 m", "0,90 m"],
+    ans: 1,
+    expl: "1 Unité de Passage = 0,60 m. C'est l'unité de mesure des dégagements en ERP. Une porte à 1 UP doit mesurer au minimum 0,90 m de largeur réelle."
+  },
+  {
+    q: "Qu'est-ce que le phénomène de 'back-draft' ?",
+    opts: [
+      "L'embrasement généralisé soudain d'un local entier",
+      "Une explosion ou déflagration provoquée par l'apport soudain d'air dans un local en feu manquant d'oxygène",
+      "La propagation du feu par conduction dans les structures métalliques",
+      "Le phénomène de vaporisation explosive de l'eau sur l'huile"
+    ],
+    ans: 1,
+    expl: "Le back-draft se produit quand un feu couvant, manquant d'oxygène, reçoit soudainement un apport d'air (ouverture de porte). L'explosion peut être mortelle. Signe précurseur : porte chaude, fumée qui rentre par les fissures."
+  },
+  {
+    q: "La couleur de l'ampoule d'un sprinkler déclenchant à 68°C est :",
+    opts: ["Orange (57°C)", "Rouge (68°C)", "Jaune (79°C)", "Vert (93°C)"],
+    ans: 1,
+    expl: "La tête sprinkler rouge déclenche à 68°C. C'est la température standard la plus courante. Orange = 57°C, Jaune = 79°C, Vert = 93°C, Bleu = 141°C, Violet = 182°C."
+  },
+  {
+    q: "Face à une victime inconsciente qui respire normalement, la première action est de :",
+    opts: [
+      "Commencer immédiatement la RCP (30 compressions / 2 insufflations)",
+      "La mettre en Position Latérale de Sécurité (PLS) et appeler le 15",
+      "La secouer vigoureusement pour la réveiller",
+      "Lui donner de l'eau pour la réhydrater"
+    ],
+    ans: 1,
+    expl: "Victime inconsciente + respire = PLS (Position Latérale de Sécurité). Elle prévient l'inhalation de vomissements. Si elle ne respirait pas (ou gasps), il faudrait démarrer la RCP immédiatement."
+  },
+  {
+    q: "La fréquence des compressions thoraciques lors d'une RCP adulte est de :",
+    opts: [
+      "60 à 80 compressions par minute",
+      "80 à 100 compressions par minute",
+      "100 à 120 compressions par minute",
+      "120 à 150 compressions par minute"
+    ],
+    ans: 2,
+    expl: "La RCP adulte se réalise au rythme de 100 à 120 compressions par minute, avec une profondeur de 5 à 6 cm, au ratio 30 compressions / 2 insufflations, en continu."
+  },
+  {
+    q: "Pour refroidir une brûlure thermique, on utilise :",
+    opts: [
+      "De la glace directement sur la brûlure",
+      "De l'eau à 15–25°C pendant 10 à 15 minutes",
+      "Du beurre ou de la crème hydratante",
+      "De l'alcool à 70° pour désinfecter"
+    ],
+    ans: 1,
+    expl: "Refroidir une brûlure thermique avec de l'eau tempérée (15–25°C) pendant 10 à 15 minutes. La glace aggrave les lésions. Aucun corps gras ni désinfectant ne doit être appliqué."
+  },
+  {
+    q: "Le garrot doit être posé :",
+    opts: [
+      "Directement sur la plaie pour comprimer",
+      "À 5–7 cm au-dessus de la plaie",
+      "Le plus haut possible sur le membre",
+      "À 5–7 cm en dessous de la plaie"
+    ],
+    ans: 1,
+    expl: "Le garrot se pose à 5–7 cm au-dessus de la plaie. Il faut marquer l'heure de pose et ne jamais le desserrer une fois posé. Il est réservé aux hémorragies massives impossibles à comprimer directement."
+  },
+  {
+    q: "La non-assistance à personne en danger (NAPD) est punie de :",
+    opts: [
+      "1 an d'emprisonnement et 15 000 € d'amende",
+      "3 ans d'emprisonnement et 45 000 € d'amende",
+      "5 ans d'emprisonnement et 75 000 € d'amende",
+      "Suspension de la carte professionnelle uniquement"
+    ],
+    ans: 2,
+    expl: "L'article 223-6 du Code pénal punit la NAPD de 5 ans d'emprisonnement et 75 000 € d'amende. La mise en danger délibérée (art. 223-1 CP) est punie de 1 an et 15 000 €."
+  },
+  {
+    q: "L'autonomie minimale d'un BAES (Bloc Autonome d'Éclairage de Sécurité) est de :",
+    opts: ["30 minutes", "1 heure", "2 heures", "3 heures"],
+    ans: 1,
+    expl: "Un BAES doit disposer d'une autonomie minimale de 1 heure sur batterie. Il s'allume automatiquement en cas de coupure du courant normal."
+  },
+  {
+    q: "Une porte coupe-feu est coincée ouverte par un extincteur. Que faites-vous ?",
+    opts: [
+      "Laisser, cela facilite la circulation dans les couloirs",
+      "Retirer immédiatement l'extincteur, refermer la porte et signaler l'anomalie au SSIAP 2",
+      "Prendre une photo et attendre la prochaine ronde",
+      "Vérifier si la porte est une porte coupe-feu avant d'agir"
+    ],
+    ans: 1,
+    expl: "Il faut retirer immédiatement le cale et remettre la porte en position fermée, puis signaler l'anomalie dans la main courante et au SSIAP 2. Caler une porte coupe-feu est une infraction réglementaire grave."
+  },
+  {
+    q: "Le détecteur optique de fumée fonctionne sur le principe :",
+    opts: [
+      "De l'ionisation de l'air par une source radioactive perturbée par les fumées",
+      "De la diffusion d'un rayon lumineux infrarouge par les particules de fumées visibles",
+      "D'un seuil de température fixe prédéfini",
+      "De la détection de la concentration en CO dans l'air"
+    ],
+    ans: 1,
+    expl: "Le détecteur optique utilise la diffusion d'un faisceau infrarouge par les particules de fumées. C'est le type le plus répandu, efficace sur les feux couvants et à combustion lente."
+  },
+  {
+    q: "La conservation minimale du registre de sécurité est :",
+    opts: ["1 an", "3 ans", "5 ans", "10 ans"],
+    ans: 2,
+    expl: "Le registre de sécurité doit être conservé au minimum 5 ans. C'est un document juridique consultable lors des visites de la commission de sécurité et en cas de sinistre."
+  },
+  {
+    q: "Le mode de propagation du feu responsable de la majorité des décès par asphyxie est :",
+    opts: ["La conduction", "La convection", "Le rayonnement", "Le transport direct par flammèches"],
+    ans: 1,
+    expl: "La convection (déplacement des gaz chauds et des fumées vers le haut) est le principal vecteur de propagation dans les bâtiments et la principale cause de décès par asphyxie dans les incendies."
+  },
+  {
+    q: "En cas d'obstruction totale des voies aériennes chez un adulte conscient, la procédure est :",
+    opts: [
+      "RCP immédiate (30/2)",
+      "5 claques dans le dos puis 5 compressions abdominales (Heimlich), à alterner",
+      "Lui donner de l'eau pour faire descendre l'objet",
+      "Mettre en PLS et appeler le 15"
+    ],
+    ans: 1,
+    expl: "Pour une obstruction totale chez un adulte conscient : 5 claques vigoureuses entre les omoplates, puis si inefficaces 5 compressions abdominales (manœuvre de Heimlich). Alterner jusqu'à désobstruction ou perte de conscience."
+  },
+  {
+    q: "Le permis de feu est obligatoire pour :",
+    opts: [
+      "Tout travail effectué dans un ERP, quelle que soit sa nature",
+      "Tout travail par point chaud (soudure, meulage, découpe, chalumeau)",
+      "Les rondes de surveillance uniquement",
+      "L'utilisation d'un extincteur"
+    ],
+    ans: 1,
+    expl: "Le permis de feu est obligatoire avant tout travail par point chaud (soudure, meulage, chalumeau, découpe thermique). Il doit être signé par l'exécutant, le responsable des travaux et le responsable sécurité."
+  },
+  {
+    q: "En présence d'une odeur de gaz dans un local, la première chose à faire est :",
+    opts: [
+      "Allumer la lumière pour mieux voir",
+      "Ne pas actionner les interrupteurs, ventiler le local, fermer la vanne gaz si accessible, évacuer et alerter",
+      "Utiliser un extincteur CO₂ pour neutraliser le gaz",
+      "Appeler immédiatement depuis l'intérieur du local sur son téléphone portable"
+    ],
+    ans: 1,
+    expl: "Odeur de gaz : ne pas créer d'étincelles (interrupteurs, téléphone dans le local), ventiler, fermer la vanne gaz si accessible, évacuer les personnes, alerter depuis l'extérieur."
+  },
+  {
+    q: "Un ERP de 1ère catégorie correspond à un effectif de :",
+    opts: [
+      "Jusqu'à 300 personnes",
+      "De 301 à 700 personnes",
+      "De 701 à 1 500 personnes",
+      "Plus de 1 500 personnes"
+    ],
+    ans: 3,
+    expl: "La 1ère catégorie regroupe les ERP dont l'effectif total dépasse 1 500 personnes. La 2ème catégorie = 701 à 1 500 personnes. La 3ème = 301 à 700 personnes. La 4ème = jusqu'à 300 personnes. La 5ème : petits ERP."
+  },
+  {
+    q: "La méthode FAST (ou VITE) permet de reconnaître :",
+    opts: [
+      "Un arrêt cardiaque",
+      "Un accident vasculaire cérébral (AVC)",
+      "Une obstruction des voies aériennes",
+      "Un état de choc hémorragique"
+    ],
+    ans: 1,
+    expl: "VITE (ou FAST) permet de reconnaître un AVC : Visage (asymétrie), Incapacité bras, Trouble parole, Éveil (appeler le 15 d'urgence). Il faut noter l'heure de début des symptômes."
+  },
+  {
+    q: "Le délai maximal pour effectuer une levée de doute en ERP, avant de déclencher l'évacuation générale, est de :",
+    opts: ["1 minute", "3 minutes", "5 minutes", "10 minutes"],
+    ans: 1,
+    expl: "En ERP, le délai maximal pour la levée de doute est de 3 minutes. L'agent se rend sur la zone avec un extincteur adapté et une radio. Le SSIAP 2 reste au PC sécurité."
+  }
+];
+
+let currentQ = 0;
+let score    = 0;
+let answered = 0;
+const letters = ['A', 'B', 'C', 'D'];
+
+function renderQuestion(idx) {
+  const q = QUESTIONS[idx];
+  document.getElementById('q-number').textContent = 'QUESTION ' + String(idx + 1).padStart(2, '0');
+  document.getElementById('q-text').textContent = q.q;
+  document.getElementById('q-counter').textContent = 'Question ' + (idx + 1) + ' / 31';
+  document.getElementById('qprogress').style.width = ((idx / 31) * 100) + '%';
+  document.getElementById('q-expl').textContent = '';
+  document.getElementById('q-expl').classList.remove('show');
+  document.getElementById('q-next-btn').classList.remove('show');
+
+  const optsEl = document.getElementById('q-options');
+  optsEl.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'q-opt';
+    btn.innerHTML = '<span class="q-opt-letter">' + letters[i] + '</span><span>' + opt + '</span>';
+    btn.onclick = () => selectAnswer(i, q.ans, q.expl);
+    optsEl.appendChild(btn);
+  });
+}
+
+function selectAnswer(chosen, correct, expl) {
+  const opts = document.querySelectorAll('.q-opt');
+  opts.forEach(o => o.disabled = true);
+
+  opts[chosen].classList.add(chosen === correct ? 'correct' : 'wrong');
+  opts[correct].classList.add('correct');
+
+  if (chosen === correct) score++;
+  answered++;
+
+  const explEl = document.getElementById('q-expl');
+  explEl.innerHTML = '<strong>💡 Explication :</strong> ' + expl;
+  explEl.classList.add('show');
+
+  document.getElementById('q-score-display').textContent = 'Score : ' + score + ' / ' + answered;
+  document.getElementById('q-next-btn').classList.add('show');
+  document.getElementById('q-next-btn').textContent = currentQ < 30 ? 'Question suivante →' : 'Voir mon score';
+}
+
+function nextQuestion() {
+  currentQ++;
+  if (currentQ >= 31) {
+    showScore();
+  } else {
+    renderQuestion(currentQ);
+  }
+}
+
+function showScore() {
+  document.getElementById('q-card').style.display = 'none';
+  document.getElementById('qprogress').style.width = '100%';
+  const scoreEl = document.getElementById('quiz-score');
+  scoreEl.classList.add('show');
+
+  document.getElementById('final-score-num').textContent = score;
+  document.getElementById('score-denom').textContent = '/ 31';
+
+  const pct = Math.round((score / 31) * 100);
+  document.getElementById('score-circle').style.background =
+    'conic-gradient(var(--' + (score >= 19 ? 'green' : score >= 13 ? 'yellow' : 'red') + ') ' + pct + '%, var(--bg-3) 0%)';
+
+  let label, msg;
+  if (score >= 26) {
+    label = '🏆 Excellent !';
+    msg = 'Score exceptionnel ! Vous êtes très bien préparé(e) pour l\'examen SSIAP 1.';
+  } else if (score >= 19) {
+    label = '✅ Très bien !';
+    msg = 'Bon résultat, largement au-dessus du seuil requis. Révisez les points manqués.';
+  } else if (score >= 13) {
+    label = '⚠️ Limite';
+    msg = 'Résultat limite. Renforcez les modules où vous avez fait des erreurs.';
+  } else {
+    label = '❌ À retravailler';
+    msg = 'Score insuffisant. Reprenez le cours module par module et refaites le quiz.';
+  }
+  document.getElementById('score-label').textContent = label;
+  document.getElementById('score-msg').textContent = msg;
+}
+
+function restartQuiz() {
+  currentQ = 0;
+  score    = 0;
+  answered = 0;
+  document.getElementById('q-card').style.display = '';
+  document.getElementById('quiz-score').classList.remove('show');
+  document.getElementById('q-score-display').textContent = 'Score : 0 / 0';
+  renderQuestion(0);
+}
+
+// Init
+renderQuestion(0);
+</script>
+</body>
+</html>
