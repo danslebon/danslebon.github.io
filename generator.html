@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QR Code Generator</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0f0f0f;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    color: #fff;
+  }
+
+  /* ── Lock screen ── */
+  .lock-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    animation: fadeIn .4s ease;
+  }
+
+  .lock-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+  }
+
+  .lock-title {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  .lock-input {
+    width: 260px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid #333;
+    background: #1a1a1a;
+    color: #eee;
+    font-size: 15px;
+    text-align: center;
+    outline: none;
+    transition: border-color .15s;
+    -webkit-text-security: disc;
+  }
+  .lock-input:focus { border-color: #6366f1; }
+  .lock-input.shake {
+    animation: shake .4s ease;
+    border-color: #ef4444;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+  }
+
+  .lock-hint {
+    font-size: 12px;
+    color: #444;
+  }
+
+  /* ── Profile picker ── */
+  .profile-screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    animation: fadeIn .4s ease;
+  }
+
+  .profile-title {
+    font-size: 14px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+  }
+
+  .profile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 300px;
+  }
+
+  .profile-btn {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    background: #1a1a1a;
+    border: 1px solid #282828;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .profile-btn:hover {
+    background: #202020;
+    border-color: #6366f1;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(99,102,241,.15);
+  }
+
+  .profile-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .profile-info { display: flex; flex-direction: column; gap: 3px; }
+  .profile-name { font-size: 16px; font-weight: 600; }
+  .profile-card {
+    font-size: 12px;
+    color: #666;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+  }
+
+  /* ── QR screen ── */
+  .app-screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    animation: fadeIn .4s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 12px;
+    transition: background .15s;
+  }
+  .top-bar:hover { background: #1a1a1a; }
+
+  .top-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  .top-name { font-size: 15px; font-weight: 600; }
+  .top-switch { font-size: 11px; color: #6366f1; margin-left: 4px; }
+
+  .card {
+    background: #1a1a1a;
+    border-radius: 24px;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.5);
+    min-width: 340px;
+  }
+
+  .qr-container {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .qr-container canvas { display: block; border-radius: 4px; }
+
+  .code-text {
+    font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace;
+    font-size: 11px;
+    color: #888;
+    text-align: center;
+    word-break: break-all;
+    max-width: 280px;
+    line-height: 1.5;
+  }
+
+  .progress-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #2a2a2a;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #6366f1, #a78bfa);
+    border-radius: 3px;
+    transition: none;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #555;
+  }
+
+  .mode-label {
+    font-size: 11px;
+    color: #6366f1;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+  }
+
+  /* Settings gear */
+  .gear-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #888;
+    font-size: 20px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    transition: background .15s, color .15s;
+    z-index: 100;
+  }
+  .gear-btn:hover { background: #252525; color: #fff; }
+
+  /* Panel */
+  .panel-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.5);
+    z-index: 200;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s;
+  }
+  .panel-overlay.open { opacity: 1; pointer-events: auto; }
+
+  .panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 360px;
+    max-width: 90vw;
+    height: 100vh;
+    background: #141414;
+    border-left: 1px solid #252525;
+    z-index: 300;
+    transform: translateX(100%);
+    transition: transform .25s ease;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+  }
+  .panel.open { transform: translateX(0); }
+
+  .panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid #222;
+  }
+  .panel-header h2 { font-size: 16px; font-weight: 600; }
+  .panel-close {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .panel-close:hover { color: #fff; }
+
+  .panel-body { padding: 24px; display: flex; flex-direction: column; gap: 20px; }
+
+  .field label {
+    display: block;
+    font-size: 11px;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+  }
+  .field input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    background: #1a1a1a;
+    color: #eee;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    outline: none;
+    transition: border-color .15s;
+  }
+  .field input:focus { border-color: #6366f1; }
+  .field input::placeholder { color: #444; }
+
+  .divider {
+    border: none;
+    border-top: 1px solid #222;
+    margin: 4px 0;
+  }
+
+  .section-title {
+    font-size: 11px;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .btn {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background .15s;
+  }
+  .btn-primary { background: #6366f1; color: #fff; }
+  .btn-primary:hover { background: #5558e6; }
+  .btn-secondary { background: #252525; color: #ccc; }
+  .btn-secondary:hover { background: #333; }
+
+  .btn-row { display: flex; gap: 8px; }
+  .btn-row .btn { flex: 1; }
+</style>
+</head>
+<body>
+
+<!-- ── Lock screen ── -->
+<div class="lock-screen" id="lock-screen">
+  <div class="lock-icon">&#128274;</div>
+  <div class="lock-title">Enter password</div>
+  <input class="lock-input" id="lock-input" type="password" placeholder="Password" autofocus>
+  <div class="lock-hint">Press enter to unlock</div>
+</div>
+
+<!-- ── Profile picker ── -->
+<div class="profile-screen" id="profile-screen">
+  <div class="profile-title">Select profile</div>
+  <div class="profile-list" id="profile-list"></div>
+</div>
+
+<!-- ── QR screen ── -->
+<div class="app-screen" id="app-screen">
+  <div class="top-bar" id="top-bar">
+    <div class="top-avatar" id="top-avatar"></div>
+    <span class="top-name" id="top-name"></span>
+    <span class="top-switch">switch</span>
+  </div>
+
+  <div class="card">
+    <div class="mode-label" id="mode-label">Live</div>
+    <div class="qr-container">
+      <canvas id="qr"></canvas>
+    </div>
+    <div class="code-text" id="code-text"></div>
+    <div class="progress-wrap" id="progress-wrap">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress"></div>
+      </div>
+      <div class="progress-label">
+        <span>Next refresh</span>
+        <span id="timer">5.0s</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<button class="gear-btn" id="gear-btn">&#9881;</button>
+
+<div class="panel-overlay" id="overlay"></div>
+<div class="panel" id="panel">
+  <div class="panel-header">
+    <h2>Settings</h2>
+    <button class="panel-close" id="panel-close">&times;</button>
+  </div>
+  <div class="panel-body">
+    <div class="section-title">Member config</div>
+    <div class="field">
+      <label>Card Number</label>
+      <input type="text" id="cfg-card">
+    </div>
+    <div class="field">
+      <label>GUID (comId)</label>
+      <input type="text" id="cfg-guid" value="ECQ">
+    </div>
+    <div class="field">
+      <label>Device ID</label>
+      <input type="text" id="cfg-device" value="b7e0a3e8-1edf-4e6c-b5d3-4ff2b1189c1e">
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-primary" id="btn-save">Save &amp; restart</button>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-title">One-time QR</div>
+    <div class="field">
+      <label>Timestamp (unix seconds)</label>
+      <input type="text" id="cfg-iat" placeholder="Leave empty for current time">
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" id="btn-onetime">Generate one-time</button>
+      <button class="btn btn-secondary" id="btn-resume">Resume live</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+<script>
+// ── Encrypted payload (AES-256-GCM, PBKDF2-SHA256 310k iter) ──
+const VAULT = {"salt": "G2Z5KASyAlJMzvYDUQPqlQ==", "iv": "O+q/pnOyYD8eb+lY", "ct": "n+uTm2GZnwl2a8oTdsqlry8k6CvQLs8t29f7KiEExSQds/f0v/qrYRz3rH/QZm3xQ+AnQS6E8wYGMqnFg4Slau2Hlbt2vYKfR6U4wHU6Zi0P4RjfK+3vPDbgOSp2n7wHHSSNCOkOhBIGrB6HuBRcZEwnFFwwfYcppSey2R5Vet2sGzudIZ/fugg3oA13jTusnSb2IAm7Fi6wBp7w"};
+
+const INTERVAL = 5000;
+const LS_KEY = 'qrc_config';
+
+let PROFILES = [];
+
+// ── State ──
+let config = { cardNr: '', guid: 'ECQ', deviceId: 'b7e0a3e8-1edf-4e6c-b5d3-4ff2b1189c1e' };
+let activeProfile = null;
+let mode = 'live';
+let startTime = performance.now();
+
+// ── Crypto helpers ──
+function b64ToBytes(b64) {
+  return Uint8Array.from(atob(b64), c => c.charCodeAt(0));
+}
+
+async function deriveKey(password, salt) {
+  const enc = new TextEncoder();
+  const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey(
+    { name: 'PBKDF2', salt, iterations: 310000, hash: 'SHA-256' },
+    keyMaterial,
+    { name: 'AES-GCM', length: 256 },
+    false,
+    ['decrypt']
+  );
+}
+
+async function tryDecrypt(password) {
+  try {
+    const salt = b64ToBytes(VAULT.salt);
+    const iv   = b64ToBytes(VAULT.iv);
+    const ct   = b64ToBytes(VAULT.ct);
+    const key  = await deriveKey(password, salt);
+    const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ct);
+    return JSON.parse(new TextDecoder().decode(plain));
+  } catch {
+    return null;
+  }
+}
+
+// ── Lock screen ──
+const lockScreen    = document.getElementById('lock-screen');
+const lockInput     = document.getElementById('lock-input');
+const profileScreen = document.getElementById('profile-screen');
+const appScreen     = document.getElementById('app-screen');
+
+lockInput.addEventListener('keydown', async e => {
+  if (e.key !== 'Enter') return;
+  const result = await tryDecrypt(lockInput.value);
+  if (result) {
+    PROFILES = result.profiles;
+    lockScreen.style.display = 'none';
+    showProfiles();
+  } else {
+    lockInput.classList.add('shake');
+    lockInput.value = '';
+    setTimeout(() => lockInput.classList.remove('shake'), 400);
+  }
+});
+
+// ── Profile picker ──
+function showProfiles() {
+  profileScreen.style.display = 'flex';
+  appScreen.style.display = 'none';
+  document.getElementById('gear-btn').style.display = 'none';
+
+  const list = document.getElementById('profile-list');
+  list.innerHTML = '';
+  PROFILES.forEach((p, i) => {
+    const btn = document.createElement('div');
+    btn.className = 'profile-btn';
+    btn.innerHTML = `
+      <div class="profile-avatar" style="background:${p.color}">${p.name[0]}</div>
+      <div class="profile-info">
+        <div class="profile-name">${p.name}</div>
+        <div class="profile-card">${p.cardNr}</div>
+      </div>`;
+    btn.onclick = () => selectProfile(i);
+    list.appendChild(btn);
+  });
+
+  // ── Manual card entry ──
+  const manualBtn = document.createElement('div');
+  manualBtn.className = 'profile-btn';
+  manualBtn.innerHTML = `
+    <div class="profile-avatar" style="background:#334155">+</div>
+    <div class="profile-info">
+      <div class="profile-name">Autre</div>
+      <div class="profile-card">Saisir un numéro de carte</div>
+    </div>`;
+  manualBtn.onclick = () => {
+    manualBtn.innerHTML = `
+      <div class="profile-avatar" style="background:#334155">+</div>
+      <div class="profile-info" style="width:100%">
+        <input id="manual-card-input" type="text" placeholder="ex: V010XXXXXX"
+          style="background:#111;border:1px solid #444;border-radius:8px;color:#eee;
+                 font-family:'SF Mono','Fira Code',monospace;font-size:13px;
+                 padding:6px 10px;outline:none;width:100%;">
+      </div>`;
+    const input = document.getElementById('manual-card-input');
+    input.focus();
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') confirmManual(); });
+    manualBtn.onclick = confirmManual;
+  };
+
+  function confirmManual() {
+    const input = document.getElementById('manual-card-input');
+    if (!input) return;
+    const cardNr = input.value.trim();
+    if (!cardNr) return;
+    selectProfileManual(cardNr);
+  }
+
+  list.appendChild(manualBtn);
+}
+
+function selectProfile(idx) {
+  activeProfile = PROFILES[idx];
+  config.cardNr = activeProfile.cardNr;
+
+  // Load saved guid/device for this profile or use defaults
+  try {
+    const saved = JSON.parse(localStorage.getItem(LS_KEY + '_' + activeProfile.cardNr));
+    if (saved) {
+      config.guid = saved.guid || config.guid;
+      config.deviceId = saved.deviceId || config.deviceId;
+    }
+  } catch {}
+
+  profileScreen.style.display = 'none';
+  appScreen.style.display = 'flex';
+  document.getElementById('gear-btn').style.display = 'flex';
+
+  // Set top bar
+  document.getElementById('top-avatar').textContent = activeProfile.name[0];
+  document.getElementById('top-avatar').style.background = activeProfile.color;
+  document.getElementById('top-name').textContent = activeProfile.name;
+
+  // Populate settings
+  document.getElementById('cfg-card').value = config.cardNr;
+  document.getElementById('cfg-guid').value = config.guid;
+  document.getElementById('cfg-device').value = config.deviceId;
+
+  setMode('live');
+  refresh();
+}
+
+function selectProfileManual(cardNr) {
+  activeProfile = { name: cardNr, cardNr, color: '#334155' };
+  config.cardNr = cardNr;
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(LS_KEY + '_' + cardNr));
+    if (saved) {
+      config.guid = saved.guid || config.guid;
+      config.deviceId = saved.deviceId || config.deviceId;
+    }
+  } catch {}
+
+  profileScreen.style.display = 'none';
+  appScreen.style.display = 'flex';
+  document.getElementById('gear-btn').style.display = 'flex';
+
+  document.getElementById('top-avatar').textContent = '+';
+  document.getElementById('top-avatar').style.background = '#334155';
+  document.getElementById('top-name').textContent = cardNr;
+
+  document.getElementById('cfg-card').value = config.cardNr;
+  document.getElementById('cfg-guid').value = config.guid;
+  document.getElementById('cfg-device').value = config.deviceId;
+
+  setMode('live');
+  refresh();
+}
+
+document.getElementById('top-bar').onclick = () => {
+  mode = 'live';
+  showProfiles();
+};
+
+// ── SHA-256 ──
+async function sha256hex(str) {
+  const buf = new TextEncoder().encode(str);
+  const hash = await crypto.subtle.digest('SHA-256', buf);
+  return Array.from(new Uint8Array(hash)).map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+async function generateCode(iat) {
+  if (iat == null) iat = Math.floor(Date.now() / 1000);
+  const input = config.cardNr + config.guid + iat + config.deviceId;
+  const hex = await sha256hex(input);
+  const checksum = hex.slice(-8).toUpperCase();
+  return `GM2:${config.cardNr}:${config.guid}:${iat}:${checksum}`;
+}
+
+function renderQR(text) {
+  const qr = qrcode(0, 'M');
+  qr.addData(text);
+  qr.make();
+  const canvas = document.getElementById('qr');
+  const size = 240;
+  const modules = qr.getModuleCount();
+  const cellSize = size / modules;
+  canvas.width = size;
+  canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, size, size);
+  ctx.fillStyle = '#000000';
+  for (let r = 0; r < modules; r++)
+    for (let c = 0; c < modules; c++)
+      if (qr.isDark(r, c))
+        ctx.fillRect(c * cellSize, r * cellSize, cellSize + 0.5, cellSize + 0.5);
+}
+
+// ── Elements ──
+const progressEl  = document.getElementById('progress');
+const timerEl     = document.getElementById('timer');
+const codeTextEl  = document.getElementById('code-text');
+const progressWrap = document.getElementById('progress-wrap');
+const modeLabel   = document.getElementById('mode-label');
+
+function setMode(m) {
+  mode = m;
+  if (m === 'live') {
+    progressWrap.style.display = '';
+    modeLabel.textContent = 'Live';
+    modeLabel.style.color = '#6366f1';
+  } else {
+    progressWrap.style.display = 'none';
+    modeLabel.textContent = 'One-time';
+    modeLabel.style.color = '#f59e0b';
+  }
+}
+
+async function refresh() {
+  const code = await generateCode();
+  renderQR(code);
+  codeTextEl.textContent = code;
+  startTime = performance.now();
+}
+
+function tick() {
+  if (mode === 'live' && activeProfile) {
+    const elapsed = performance.now() - startTime;
+    const pct = Math.min(elapsed / INTERVAL, 1);
+    progressEl.style.width = (pct * 100) + '%';
+    const remaining = Math.max(0, (INTERVAL - elapsed) / 1000);
+    timerEl.textContent = remaining.toFixed(1) + 's';
+    if (pct >= 1) refresh();
+  }
+  requestAnimationFrame(tick);
+}
+requestAnimationFrame(tick);
+
+// ── Settings panel ──
+const panel   = document.getElementById('panel');
+const overlay = document.getElementById('overlay');
+function openPanel()  { panel.classList.add('open'); overlay.classList.add('open'); }
+function closePanel() { panel.classList.remove('open'); overlay.classList.remove('open'); }
+document.getElementById('gear-btn').onclick = openPanel;
+document.getElementById('panel-close').onclick = closePanel;
+overlay.onclick = closePanel;
+
+document.getElementById('btn-save').onclick = () => {
+  config.cardNr   = document.getElementById('cfg-card').value.trim();
+  config.guid     = document.getElementById('cfg-guid').value.trim();
+  config.deviceId = document.getElementById('cfg-device').value.trim();
+  localStorage.setItem(LS_KEY + '_' + activeProfile.cardNr, JSON.stringify({ guid: config.guid, deviceId: config.deviceId }));
+  setMode('live');
+  refresh();
+  closePanel();
+};
+
+document.getElementById('btn-onetime').onclick = async () => {
+  const iatField = document.getElementById('cfg-iat').value.trim();
+  const iat = iatField ? parseInt(iatField, 10) : Math.floor(Date.now() / 1000);
+  config.cardNr   = document.getElementById('cfg-card').value.trim();
+  config.guid     = document.getElementById('cfg-guid').value.trim();
+  config.deviceId = document.getElementById('cfg-device').value.trim();
+  localStorage.setItem(LS_KEY + '_' + activeProfile.cardNr, JSON.stringify({ guid: config.guid, deviceId: config.deviceId }));
+  const code = await generateCode(iat);
+  renderQR(code);
+  codeTextEl.textContent = code;
+  setMode('onetime');
+  closePanel();
+};
+
+document.getElementById('btn-resume').onclick = () => {
+  setMode('live');
+  refresh();
+  closePanel();
+};
+</script>
+</body>
+</html>
