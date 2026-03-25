@@ -542,40 +542,6 @@ function showProfiles() {
     btn.onclick = () => selectProfile(i);
     list.appendChild(btn);
   });
-
-  // ── Manual card entry ──
-  const manualBtn = document.createElement('div');
-  manualBtn.className = 'profile-btn';
-  manualBtn.innerHTML = `
-    <div class="profile-avatar" style="background:#334155">+</div>
-    <div class="profile-info">
-      <div class="profile-name">Autre</div>
-      <div class="profile-card">Saisir un numéro de carte</div>
-    </div>`;
-  manualBtn.onclick = () => {
-    manualBtn.innerHTML = `
-      <div class="profile-avatar" style="background:#334155">+</div>
-      <div class="profile-info" style="width:100%">
-        <input id="manual-card-input" type="text" placeholder="ex: V010XXXXXX"
-          style="background:#111;border:1px solid #444;border-radius:8px;color:#eee;
-                 font-family:'SF Mono','Fira Code',monospace;font-size:13px;
-                 padding:6px 10px;outline:none;width:100%;">
-      </div>`;
-    const input = document.getElementById('manual-card-input');
-    input.focus();
-    input.addEventListener('keydown', e => { if (e.key === 'Enter') confirmManual(); });
-    manualBtn.onclick = confirmManual;
-  };
-
-  function confirmManual() {
-    const input = document.getElementById('manual-card-input');
-    if (!input) return;
-    const cardNr = input.value.trim();
-    if (!cardNr) return;
-    selectProfileManual(cardNr);
-  }
-
-  list.appendChild(manualBtn);
 }
 
 function selectProfile(idx) {
@@ -601,34 +567,6 @@ function selectProfile(idx) {
   document.getElementById('top-name').textContent = activeProfile.name;
 
   // Populate settings
-  document.getElementById('cfg-card').value = config.cardNr;
-  document.getElementById('cfg-guid').value = config.guid;
-  document.getElementById('cfg-device').value = config.deviceId;
-
-  setMode('live');
-  refresh();
-}
-
-function selectProfileManual(cardNr) {
-  activeProfile = { name: cardNr, cardNr, color: '#334155' };
-  config.cardNr = cardNr;
-
-  try {
-    const saved = JSON.parse(localStorage.getItem(LS_KEY + '_' + cardNr));
-    if (saved) {
-      config.guid = saved.guid || config.guid;
-      config.deviceId = saved.deviceId || config.deviceId;
-    }
-  } catch {}
-
-  profileScreen.style.display = 'none';
-  appScreen.style.display = 'flex';
-  document.getElementById('gear-btn').style.display = 'flex';
-
-  document.getElementById('top-avatar').textContent = '+';
-  document.getElementById('top-avatar').style.background = '#334155';
-  document.getElementById('top-name').textContent = cardNr;
-
   document.getElementById('cfg-card').value = config.cardNr;
   document.getElementById('cfg-guid').value = config.guid;
   document.getElementById('cfg-device').value = config.deviceId;
